@@ -1,4 +1,4 @@
-import '../../LoginModal.css';
+import '../../styles/LoginModal.css';
 import PropTypes from "prop-types";
 import UseAuth from "../../shared/hooks/UseAuth";
 
@@ -12,9 +12,10 @@ const LoginModal = ({isVisible, onClose, onSwitchToRegister}) => {
 
         const email = event.target.username.value;
         const password = event.target.password.value;
+        const rememberMe = event.target.rememberMe.checked; // Get checkbox value
 
         try {
-            const token = await signIn(email, password);
+            const token = await signIn(email, password, rememberMe); // Pass checkbox value to signIn
             console.log('Login successful, token:', token)
         } catch (error) {
             console.error('Login failed:', error);
@@ -28,9 +29,9 @@ const LoginModal = ({isVisible, onClose, onSwitchToRegister}) => {
                 <button className="close-button" onClick={onClose}>×</button>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username"><strong>Username</strong></label>
-                    <input type="text" id="username" name="username" placeholder='Username' required/>
+                    <input className="input-login" type="text" id="username" name="username" placeholder='Username' required/>
                     <label htmlFor="password"><strong>Password</strong></label>
-                    <input type="password" id="password" name="password" placeholder='Password' required/>
+                    <input className="input-login" type="password" id="password" name="password" placeholder='Password' required/>
                     <button type="submit" className="login-button">Log in</button>
                 </form>
                 <div className="extra-options">
@@ -41,6 +42,7 @@ const LoginModal = ({isVisible, onClose, onSwitchToRegister}) => {
         </div>
     );
 };
+
 
 LoginModal.propTypes = {
     isVisible: PropTypes.bool.isRequired,

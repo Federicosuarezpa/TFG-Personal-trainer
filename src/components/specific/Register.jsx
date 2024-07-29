@@ -1,4 +1,4 @@
-import '../../LoginModal.css';
+import '../../styles/RegisterModal.css';
 import PropTypes from "prop-types";
 
 const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
