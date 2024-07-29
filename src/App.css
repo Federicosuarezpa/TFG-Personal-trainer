@@ -1,0 +1,260 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  caret-color: transparent;
+
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 1rem;
+  color: black;
+}
+
+.header nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Wraps items on smaller screens */
+}
+
+.header nav ul li {
+  margin: 0 1rem;
+}
+
+.header nav ul li a {
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 50vh; /* Adjust height to be responsive */
+  background-color: #f4f4f4; /* Optional: Light background to help with visibility */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Dark overlay */
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.impact-text {
+  text-align: center;
+}
+
+.impact-text h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: black;
+  text-shadow:
+          1px 1px 2px rgba(255, 255, 255, 0.7), /* Light shadow for readability */
+          0 0 3px rgba(0, 0, 0, 0.3); /* Soft glow effect */
+}
+
+.impact-text p {
+  margin: 1.2rem 0 0;
+  font-size: 1.2rem;
+  color: black;
+  text-shadow:
+          0.5px 0.5px 1px rgba(255, 255, 255, 0.6), /* Light shadow for readability */
+          0 0 3px rgba(0, 0, 0, 0.4); /* Soft glow effect */
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to the top */
+  gap: 2rem; /* Space between the logos */
+  flex-wrap: wrap; /* Allows logos to wrap on smaller screens */
+  padding: 1rem;
+  box-sizing: border-box;
+  max-width: 100%; /* Ensure container fits within viewport */
+  margin: 0 auto; /* Center container */
+}
+
+.logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%; /* Full width of container */
+  max-width: 200px; /* Ensure a max width for each item */
+  box-sizing: border-box;
+}
+
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;  /* Para Safari */
+  -moz-user-select: none;     /* Para Firefox */
+  -ms-user-select: none;      /* Para Internet Explorer/Edge */
+}
+
+
+.logo {
+  height: 150px;
+  margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+.logo-item p {
+  max-width: 200px;
+  margin: 0 auto;
+  font-size: 1.2rem
+}
+/* Testimonials Section */
+.testimonials-section {
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.testimonials-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.testimonials-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.testimonial-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.testimonial-image {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.testimonial-text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-name {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 1000px) {
+  .hero-section {
+    height: 90vh; /* Adjust height for tablets and smaller screens */
+  }
+
+  .impact-text h1 {
+    font-size: 2rem; /* Smaller font size for tablets */
+  }
+
+  .impact-text p {
+    font-size: 1rem; /* Smaller font size for tablets */
+  }
+
+  .logo-container {
+    flex-direction: column;
+    align-items: center; /* Center logos vertically */
+  }
+
+  .logo-item {
+    min-height: auto; /* Remove minimum height for smaller screens */
+    max-width: 90%; /* Ensure logo items fit within the viewport */
+  }
+  .testimonials-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial-item {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 100vh; /* Adjust height for tablets and smaller screens */
+  }
+
+  .impact-text h1 {
+    font-size: 1.75rem; /* Smaller font size for tablets */
+  }
+
+  .impact-text p {
+    font-size: 0.9rem; /* Smaller font size for tablets */
+  }
+
+  .logo-container {
+    flex-direction: column;
+    gap: 2rem; /* Space between logos */
+  }
+
+  .logo-item {
+    min-height: auto; /* Remove minimum height for smaller screens */
+    max-width: 90%; /* Ensure logo items fit within the viewport */
+  }
+  .testimonials-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 100vh; /* Adjust height for mobile screens */
+  }
+
+  .impact-text h1 {
+    font-size: 1.5rem; /* Smaller font size for mobile screens */
+  }
+
+  .impact-text p {
+    font-size: 0.9rem; /* Smaller font size for mobile screens */
+  }
+
+  .logo {
+    height: 120px; /* Adjust logo size for mobile screens */
+  }
+
+  .logo-item {
+    max-width: 100%; /* Ensure logo items take full width on mobile */
+  }
+}

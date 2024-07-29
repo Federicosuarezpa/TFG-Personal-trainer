@@ -1,0 +1,156 @@
+/* App.css */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: black !important;
+    color: black !important;
+    border: 1px solid black !important;
+    background: transparent !important;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: transparent;
+    color: black; /* Texto en negro */
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input::placeholder {
+    color: rgba(0, 0, 0, 0.7); /* Placeholder en negro semi-transparente */
+}
+
+input:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #007BFF;
+    font-size: 24px;
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    color: black;
+    background: #e7e7e7;
+}
+
+.close-button:hover {
+    background: #ff0002 ;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+button[type="submit"],
+.login-button {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+button[type="submit"]:hover,
+.login-button:hover {
+    background: #0056b3;
+}
+
+button[type="submit"]:active,
+.login-button:active {
+    background: #00408a;
+}
+
+.extra-options {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.create-account,
+.forgot-password {
+    color: #007BFF;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.create-account:hover,
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}

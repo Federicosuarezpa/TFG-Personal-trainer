@@ -1,0 +1,131 @@
+/* Profile.css */
+
+.profile-page {
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 100px); /* Adjust if header and footer height sum differs */
+    padding-top: 50px; /* Adjust as per your header height */
+    padding-bottom: 50px; /* Adjust as per your footer height */
+    color: #333; /* Dark text color */
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 1200px;
+    min-height: calc(100vh - 100px); /* Adjust if header and footer height sum differs */
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    border-bottom: 1px solid #ccc;
+}
+
+.profile-header-left {
+    width: 20%;
+    padding: 11.7px;
+    align-items: center;
+    display: flex;
+}
+.profile-header-right {
+    flex: 1; /* Each section will take up equal space */
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-header-left {
+    justify-content: center;
+}
+
+.profile-header-right {
+    justify-content: center;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+.profile-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.profile-body {
+    display: flex;
+    flex: 1; /* Make the body take up remaining space */
+}
+
+.profile-sidebar {
+    width: 20%;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.profile-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-sidebar li {
+    padding: 10px 0;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    color: #333; /* Dark text color */
+    text-align: center; /* Center text */
+}
+
+.profile-sidebar li:hover {
+    background-color: #eee;
+}
+
+.profile-content {
+    width: 80%;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Dark text color */
+}
+
+.form-group input {
+    width: 100%; /* Make input take full width */
+    padding: 8px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    border: 1px solid #ccc;
+}
+
+.update-button {
+    width: 100%; /* Make button take full width */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.update-button:hover {
+    background-color: #0056b3;
+}
