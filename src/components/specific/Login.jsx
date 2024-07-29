@@ -9,12 +9,12 @@ const LoginModal = ({isVisible, onClose, onSwitchToRegister}) => {
     const {signIn} = UseAuth();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('holasdasd')
+
         const email = event.target.username.value;
         const password = event.target.password.value;
 
         try {
-            const token = await login(email, password);
+            const token = await signIn(email, password);
             console.log('Login successful, token:', token)
         } catch (error) {
             console.error('Login failed:', error);
