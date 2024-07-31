@@ -1,13 +1,14 @@
 import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import Home from "./pages/Home.jsx";
 import Footer from "./components/common/Footer.jsx";
 import Header from "./components/common/Header.jsx";
 import Login from "./components/specific/Login.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Register from "./components/specific/Register.jsx";
 import Profile from "./components/specific/Profile.jsx";
 import {AuthProvider} from "./shared/context/AuthContext.jsx";
+import AuthUser from "./components/security/AuthUser.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -38,7 +39,11 @@ function App() {
                 <main>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<Profile/>} />
+                        <Route path="/profile/:id" element={
+                            <AuthUser>
+                                <Profile/>
+                            </AuthUser>
+                        } />
                     </Routes>
                 </main>
                 <Footer />

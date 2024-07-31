@@ -1,11 +1,18 @@
 import '../../styles/Profile.css';
+import useAuth from '../../shared/hooks/UseAuth.jsx';
+
 const Profile = () => {
+    const { userData } = useAuth();
+
     return (
         <div className="profile-page">
             <div className="profile-container">
                 <div className="profile-header">
                     <div className="profile-header-left">
-                        <div className="profile-pic"></div>
+                        <div className="profile-pic">
+                            <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg'
+                                 alt='Profile'/>
+                        </div>
                     </div>
                     <div className="profile-header-right">
                         <div className="profile-title">Profile</div>
@@ -24,21 +31,42 @@ const Profile = () => {
                         <form>
                             <div className="form-group">
                                 <label htmlFor="name"><strong>Name:</strong></label>
-                                <input type="text" id="name" name="name"/>
+                                <input type="text" id="name" name="name" disabled={true} defaultValue={userData?.name}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="lastname"><strong>Name:</strong></label>
+                                <input type="text" id="lastname" name="lastname" disabled={true}
+                                       defaultValue={userData?.lastname}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="email"><strong>Email:</strong></label>
-                                <input type="email" id="email" name="email"/>
+                                <input type="email" id="email" name="email" disabled={true}
+                                       defaultValue={userData?.email}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="phone"><strong>Phone:</strong></label>
-                                <input type="tel" id="phone" name="phone"/>
+                                <input type="tel" id="phone" name="phone" defaultValue={userData?.phone}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="address"><strong>Address:</strong></label>
-                                <input type="text" id="address" name="address"/>
+                                <input type="text" id="address" name="address" defaultValue={userData?.address}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="age"><strong>Age:</strong></label>
+                                <input
+                                    type="number"
+                                    id="age"
+                                    name="age"
+                                    min="0"
+                                    max="100"
+                                    value={userData?.age}
+                                    className="input-login"
+                                />
                             </div>
                             <button type="submit" className="update-button">Update</button>
+                            <div className="extra-options">
+                                <p className="forgot-password">Delete account</p>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -19,6 +19,7 @@ input {
     color: black; /* Texto en negro */
     font-size: 16px;
     box-sizing: border-box;
+    caret-color: black;
 }
 
 input::placeholder {

@@ -3,7 +3,7 @@ const apiUrl = 'http://localhost:3000/api';
 const requestMethods = { post: 'POST', get: 'GET', put: 'PUT', delete: 'DELETE' };
 
 const endpoints = {
-    login: '/login',
+    login: '/users/login',
     register: '/register',
     users: '/users',
     recoverPassword: '/recover-password',
@@ -49,12 +49,21 @@ async function fetchApi(path, { body, method, contentType = 'application/json', 
 }
 
 export async function login( email, password ) {
-    console.log(email, password);
     const tokenData = await fetchApi(endpoints.login, {
         method: requestMethods.post,
         body: { email, password },
     });
-    const token = tokenData.data.token;
+    const token = tokenData.token;
+    localStorage.setItem('token', token);
+    return token;
+}
+
+export async function register( email, password, age, phone, address, name, lastname ) {
+    const tokenData = await fetchApi(endpoints.login, {
+        method: requestMethods.post,
+        body: { email, password, age, phone, address, name, lastname },
+    });
+    const token = tokenData.token;
     localStorage.setItem('token', token);
     return token;
 }
