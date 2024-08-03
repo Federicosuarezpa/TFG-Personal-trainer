@@ -136,3 +136,82 @@
 .update-button:hover {
     background-color: #0056b3;
 }
+
+li a {
+    color: inherit;
+}
+
+/* Profile.css */
+
+.profile-content {
+    /* Asegúrate de que haya un margen superior para separar del botón */
+    margin-bottom: 20px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.info-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.info-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.info-content {
+    flex-grow: 1;
+    margin-bottom: 10px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+}
+
+.info-text {
+    color: #333;
+}
+
+.info-footer {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.info-separator {
+    border-top: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.edit-button {
+    background-color: #666; /* Gris más oscuro */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 100%; /* Ocupa todo el ancho */
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #555; /* Gris más oscuro al pasar el ratón */
+}
+

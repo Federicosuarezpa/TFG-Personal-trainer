@@ -1,14 +1,16 @@
-import './App.css'
-import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
+import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home.jsx";
 import Footer from "./components/common/Footer.jsx";
 import Header from "./components/common/Header.jsx";
 import Login from "./components/specific/Login.jsx";
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import Register from "./components/specific/Register.jsx";
 import Profile from "./components/specific/Profile.jsx";
-import {AuthProvider} from "./shared/context/AuthContext.jsx";
+import { AuthProvider } from "./shared/context/AuthContext.jsx";
+import LoggedUser from "./components/security/LoggedUser.jsx";
 import AuthUser from "./components/security/AuthUser.jsx";
+import HealthData from "./components/specific/HealthData.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,11 +28,11 @@ function App() {
     const openRegister = () => {
         setIsModalVisible(false);
         setIsRegisterVisible(true);
-    }
+    };
 
     const closeRegister = () => {
         setIsRegisterVisible(false);
-    }
+    };
 
     return (
         <Router>
@@ -39,19 +41,24 @@ function App() {
                 <main>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/profile/:id" element={
+                        <Route path="/profile/:userId" element={
                             <AuthUser>
-                                <Profile/>
+                                <Profile />
+                            </AuthUser>
+                        } />
+                        <Route path="/health-data/:userId" element={
+                            <AuthUser>
+                                <HealthData />
                             </AuthUser>
                         } />
                     </Routes>
                 </main>
                 <Footer />
-                <Login isVisible={isModalVisible} onClose={closeModal} onSwitchToRegister={openRegister}/>
-                <Register isVisible={isRegisterVisible} onClose={closeRegister} onSwitchToLogin={openModal}/>
+                <Login isVisible={isModalVisible} onClose={closeModal} onSwitchToRegister={openRegister} />
+                <Register isVisible={isRegisterVisible} onClose={closeRegister} onSwitchToLogin={openModal} />
             </AuthProvider>
         </Router>
     );
 }
 
-export default App
+export default App;

@@ -21,7 +21,8 @@ const Profile = () => {
                 <div className="profile-body">
                     <div className="profile-sidebar">
                         <ul>
-                            <li>Personal data</li>
+                            <li className='selected-option'>Personal data</li>
+                            <li><a href={`/health-data/${userData?.id}`}>Health data </a></li>
                             <li>Diet plan</li>
                             <li>Training routine</li>
                             <li>Logout</li>
@@ -62,6 +63,10 @@ const Profile = () => {
                                     value={userData?.age}
                                     className="input-login"
                                 />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="gender"><strong>Gender:</strong></label>
+                                <input type="text" id="gender" name="gender" placeholder='Gender'/>
                             </div>
                             <button type="submit" className="update-button">Update</button>
                             <div className="extra-options">

@@ -1,5 +1,6 @@
 import UseAuth from '../../shared/hooks/UseAuth.jsx';
 import PropTypes from "prop-types";
+
 export default function LoggedUser({ children }) {
     const { isUserLogged } = UseAuth();
 
@@ -7,5 +8,5 @@ export default function LoggedUser({ children }) {
 }
 
 LoggedUser.propTypes = {
-    children: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,  // Acepta cualquier nodo React
 };

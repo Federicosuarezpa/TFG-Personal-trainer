@@ -24,7 +24,7 @@ const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
             const token = await signIn(email, password);
             console.log('Login successful:', { email, token });
             onClose();
-            navigate('/profile');
+            navigate(`/profile/${token.id}`);
         } catch (error) {
             console.error('Login failed:', error);
             setError('Incorrect username or password.'); // Establece el mensaje de error

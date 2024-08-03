@@ -12,5 +12,5 @@ export default function AuthUser({ children }) {
 }
 
 AuthUser.propTypes = {
-    children: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
 };
