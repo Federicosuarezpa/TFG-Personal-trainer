@@ -74,8 +74,8 @@ button:focus-visible {
   background: #ffffff;
   padding: 20px 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Added z-index */
-  position: relative; /* Ensure it's positioned correctly */
+  z-index: 1000;
+  position: relative;
 }
 
 .header nav {
@@ -154,9 +154,9 @@ main {
 }
 .no-select {
   user-select: none;
-  -webkit-user-select: none;  /* Para Safari */
-  -moz-user-select: none;     /* Para Firefox */
-  -ms-user-select: none;      /* Para Internet Explorer/Edge */
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
 }
 
 

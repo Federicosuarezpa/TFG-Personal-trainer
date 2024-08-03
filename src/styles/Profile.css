@@ -1,20 +1,19 @@
 /* Profile.css */
-
 .profile-page {
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    min-height: calc(100vh - 100px); /* Adjust if header and footer height sum differs */
-    padding-top: 50px; /* Adjust as per your header height */
-    padding-bottom: 50px; /* Adjust as per your footer height */
+    min-height: calc(100vh - 100px);
+    padding-top: 50px;
+    padding-bottom: 50px;
     color: #333; /* Dark text color */
 }
 
 .profile-container {
     width: 100%;
     max-width: 1200px;
-    min-height: calc(100vh - 100px); /* Adjust if header and footer height sum differs */
+    min-height: calc(100vh - 100px);
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: white;
@@ -214,4 +213,71 @@ li a {
 .edit-button:hover {
     background-color: #555; /* Gris más oscuro al pasar el ratón */
 }
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+select, input[type="select"] {
+    margin-right: 0.5rem;
+}
+
+input[type="radio"] + label {
+    margin-right: 1rem;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    color: black;
+}
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+}
+
+.form-group select {
+    height: 40px;
+    padding: 8px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+
 

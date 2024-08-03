@@ -47,9 +47,9 @@ body {
 .hero-section {
   position: relative;
   width: auto;
-  height: 50vh; /* Adjust height to be responsive */
-  background-color: #f4f4f4; /* Optional: Light background to help with visibility */
-  min-height: 550px; /* Ajusta según sea necesario */
+  height: 50vh;
+  background-color: #f4f4f4;
+  min-height: 550px;
 }
 
 .overlay {
@@ -58,7 +58,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1); /* Dark overlay */
+  background: rgba(0, 0, 0, 0.1);
   color: black;
   display: flex;
   flex-direction: column;
@@ -76,8 +76,8 @@ body {
   margin: 0;
   color: black;
   text-shadow:
-          1px 1px 2px rgba(255, 255, 255, 0.7), /* Light shadow for readability */
-          0 0 3px rgba(0, 0, 0, 0.3); /* Soft glow effect */
+          1px 1px 2px rgba(255, 255, 255, 0.7),
+          0 0 3px rgba(0, 0, 0, 0.3);
 }
 
 .impact-text p {
@@ -85,8 +85,8 @@ body {
   font-size: 1.2rem;
   color: black;
   text-shadow:
-          0.5px 0.5px 1px rgba(255, 255, 255, 0.6), /* Light shadow for readability */
-          0 0 3px rgba(0, 0, 0, 0.4); /* Soft glow effect */
+          0.5px 0.5px 1px rgba(255, 255, 255, 0.6),
+          0 0 3px rgba(0, 0, 0, 0.4);
 }
 
 .logo-container {
@@ -114,9 +114,9 @@ body {
 
 .no-select {
   user-select: none;
-  -webkit-user-select: none;  /* Para Safari */
-  -moz-user-select: none;     /* Para Firefox */
-  -ms-user-select: none;      /* Para Internet Explorer/Edge */
+  -webkit-user-select: none;  /* Safari */
+  -moz-user-select: none;     /* Firefox */
+  -ms-user-select: none;      /* Internet Explorer/Edge */
 }
 
 
@@ -131,7 +131,6 @@ body {
   margin: 0 auto;
   font-size: 1.2rem
 }
-/* Testimonials Section */
 .testimonials-section {
   padding: 2rem;
   background-color: #f9f9f9;
@@ -177,29 +176,28 @@ body {
   color: #666;
 }
 
-/* Responsive Styles */
 @media (max-width: 1000px) {
   .hero-section {
-    height: 100%; /* Adjust height for tablets and smaller screens */
-    min-height: 2900px; /* Ajusta según sea necesario */
+    height: 100%;
+    min-height: 2900px;
   }
 
   .impact-text h1 {
-    font-size: 2rem; /* Smaller font size for tablets */
+    font-size: 2rem;
   }
 
   .impact-text p {
-    font-size: 1rem; /* Smaller font size for tablets */
+    font-size: 1rem;
   }
 
   .logo-container {
     flex-direction: column;
-    align-items: center; /* Center logos vertically */
+    align-items: center;
   }
 
   .logo-item {
-    min-height: auto; /* Remove minimum height for smaller screens */
-    max-width: 90%; /* Ensure logo items fit within the viewport */
+    min-height: auto;
+    max-width: 90%;
   }
   .testimonials-container {
     flex-direction: column;
@@ -213,27 +211,27 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    height: 100%; /* Adjust height for tablets and smaller screens */
-    min-height: 2900px; /* Ajusta según sea necesario */
+    height: 100%;
+    min-height: 2900px;
     position: absolute;
   }
 
   .impact-text h1 {
-    font-size: 1.75rem; /* Smaller font size for tablets */
+    font-size: 1.75rem;
   }
 
   .impact-text p {
-    font-size: 0.9rem; /* Smaller font size for tablets */
+    font-size: 0.9rem;
   }
 
   .logo-container {
     flex-direction: column;
-    gap: 2rem; /* Space between logos */
+    gap: 2rem;
   }
 
   .logo-item {
-    min-height: auto; /* Remove minimum height for smaller screens */
-    max-width: 90%; /* Ensure logo items fit within the viewport */
+    min-height: auto;
+    max-width: 90%;
   }
   .testimonials-container {
     flex-direction: column;
@@ -243,73 +241,73 @@ body {
 
 @media (max-width: 768px) {
   .hero-section {
-    height: 100%; /* Adjust height for tablets and smaller screens */
-    min-height: 2900px; /* Ajusta según sea necesario */
+    height: 100%;
+    min-height: 2900px;
     position: relative;
   }
 
   .impact-text h1 {
-    font-size: 1.5rem; /* Smaller font size for mobile screens */
+    font-size: 1.5rem;
   }
 
   .impact-text p {
-    font-size: 0.9rem; /* Smaller font size for mobile screens */
+    font-size: 0.9rem;
   }
 
   .logo {
-    height: 120px; /* Adjust logo size for mobile screens */
+    height: 120px;
   }
 
   .logo-item {
-    max-width: 100%; /* Ensure logo items take full width on mobile */
+    max-width: 100%;
   }
 }
 
 @media (max-width: 400px) and (max-height: 700px) {
   .hero-section {
-    height: 100%; /* Adjust height for tablets and smaller screens */
-    min-height: 1700px; /* Ajusta según sea necesario */
+    height: 100%;
+    min-height: 1700px;
     position: relative;
   }
 
   .impact-text h1 {
-    font-size: 1.5rem; /* Smaller font size for mobile screens */
+    font-size: 1.5rem;
   }
 
   .impact-text p {
-    font-size: 0.9rem; /* Smaller font size for mobile screens */
+    font-size: 0.9rem;
   }
 
   .logo {
-    height: 120px; /* Adjust logo size for mobile screens */
+    height: 120px;
   }
 
   .logo-item {
-    max-width: 100%; /* Ensure logo items take full width on mobile */
+    max-width: 100%;
   }
 }
 
 @media (max-width: 600px) and (max-height: 700px) {
   .hero-section {
-    height: 100%; /* Adjust height for tablets and smaller screens */
-    min-height: 2300px; /* Ajusta según sea necesario */
+    height: 100%;
+    min-height: 2300px;
     position: relative;
   }
 
   .impact-text h1 {
-    font-size: 1.5rem; /* Smaller font size for mobile screens */
+    font-size: 1.5rem;
   }
 
   .impact-text p {
-    font-size: 0.9rem; /* Smaller font size for mobile screens */
+    font-size: 0.9rem;
   }
 
   .logo {
-    height: 120px; /* Adjust logo size for mobile screens */
+    height: 120px;
   }
 
   .logo-item {
-    max-width: 100%; /* Ensure logo items take full width on mobile */
+    max-width: 100%;
   }
 }
 

@@ -1,8 +1,43 @@
 import '../../styles/Profile.css';
 import useAuth from '../../shared/hooks/UseAuth.jsx';
+import {useState} from "react";
 
 const Profile = () => {
     const { userData } = useAuth();
+    const [error, setError] = useState(null); // Estado para el mensaje de error
+    const [male, setMale] = useState(false);
+    const [female, setFemale] = useState(false);
+
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const phone = event.target.phone.value;
+        const address = event.target.address.value;
+        const age = event.target.age.value;
+        const gender = event.target.gender.value;
+        console.log(gender)
+        if (gender === '') {
+            setError('Please select gender');
+            return;
+        }
+
+        if (!phone || !age || !address) {
+            setError('All fields are required');
+            return;
+        }
+
+        try {
+
+        } catch (error) {
+            setError('Incorrect username or password.'); // Establece el mensaje de error
+        }
+    };
+
+    const clearError = () => {
+        setError(null);
+    };
 
     return (
         <div className="profile-page">
@@ -29,7 +64,7 @@ const Profile = () => {
                         </ul>
                     </div>
                     <div className="profile-content">
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="name"><strong>Name:</strong></label>
                                 <input type="text" id="name" name="name" disabled={true} defaultValue={userData?.name}/>
@@ -60,19 +95,28 @@ const Profile = () => {
                                     name="age"
                                     min="0"
                                     max="100"
-                                    value={userData?.age}
+                                    defaultValue={userData?.age}
                                     className="input-login"
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="gender"><strong>Gender:</strong></label>
-                                <input type="text" id="gender" name="gender" placeholder='Gender'/>
+                                <select id="gender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male" selected={male}>Male</option>
+                                    <option value="female" selected={female}>Female</option>
+                                </select>
                             </div>
                             <button type="submit" className="update-button">Update</button>
-                            <div className="extra-options">
-                                <p className="forgot-password">Delete account</p>
-                            </div>
                         </form>
+                        {error && (
+                            <div className="error-message" onClick={clearError}>
+                                {error}
+                            </div>
+                        )}
+                        <div className="extra-options">
+                            <p className="forgot-password">Delete account</p>
+                        </div>
                     </div>
                 </div>
             </div>
