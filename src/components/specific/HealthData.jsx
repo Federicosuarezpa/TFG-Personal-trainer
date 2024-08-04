@@ -11,9 +11,8 @@ const Profile = () => {
     useEffect(() => {
         getUserHealthData().then((data) => {
             setWeekData(data ? data['formattedData'] : []);
-            console.log(data);
         });
-    });
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,13 +30,19 @@ const Profile = () => {
             return;
         }
         try {
-            const healthData = await createHealthData(height, weight, bodyfat, muscle, objective, exercisefrequency, fileUpload);
-            setWeekData([...weekData, healthData]);
+            await createHealthData(weight, height, muscle, bodyfat, objective, exercisefrequency, fileUpload);
+            await updateHealthData();
             clearError();
         } catch (error) {
             setError('Error creating health data');
         }
     };
+
+    const updateHealthData = async () => {
+        getUserHealthData().then((data) => {
+            setWeekData(data ? data['formattedData'] : []);
+        });
+    }
 
     const clearError = () => {
         setError(null);
@@ -76,13 +81,13 @@ const Profile = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="weight"><strong>Weight:</strong></label>
-                                <input type="email" id="weight" name="weight"
+                                <input type="text" id="weight" name="weight"
                                        placeholder='Weight in kg: 70.3 for example'
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="bodyfat"><strong>Body fat percentage:</strong></label>
-                                <input type="tel" id="bodyfat" name="bodyfat"
+                                <input type="text" id="bodyfat" name="bodyfat"
                                        placeholder='Body fat percentage if you know it, for example 20'/>
                             </div>
                             <div className="form-group">
@@ -137,7 +142,7 @@ const Profile = () => {
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Exercise frequency:</div>
-                                            <div className="info-text">{week.frequency}%</div>
+                                            <div className="info-text">{week.exerciseFrequency} times per week</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Objective:</div>

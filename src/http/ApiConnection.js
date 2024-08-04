@@ -86,10 +86,10 @@ export async function getUserHealthData() {
     });
 }
 
-export async function createHealthData( weight, height, muscle, bodyfat, image, objective, frequency ) {
+export async function createHealthData( weight, height, muscle, bodyfat, objective, frequency, image ) {
     return await fetchApi(endpoints.createHealthData, {
         method: requestMethods.post,
-        body: { weight, height, muscle, bodyfat, image, objective, frequency },
+        body: { weight, height, muscle, bodyfat, objective, frequency, image },
     });
 }
 
