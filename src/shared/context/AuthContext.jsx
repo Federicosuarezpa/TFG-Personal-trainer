@@ -19,8 +19,9 @@ export function AuthProvider({ children }) {
     // Métodos de autenticación y gestión de usuario
     const signIn = async (email, password) => {
         const loginData = await login(email, password);
-        sessionStorage.setItem('token', loginData);
-        const tokenObject = decodeTokenData(loginData);
+        sessionStorage.setItem('token', loginData.token);
+        console.log(token)
+        const tokenObject = decodeTokenData(loginData.token);
         setUserData(tokenObject);
         setIsUserLogged(true);
         return tokenObject;
@@ -34,7 +35,6 @@ export function AuthProvider({ children }) {
     const signOut = () => {
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
-        history.push('/login');
         setUserData(null);
         setIsUserLogged(false);
     };

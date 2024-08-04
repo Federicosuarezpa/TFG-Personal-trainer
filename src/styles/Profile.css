@@ -156,11 +156,11 @@ li a {
 .info-box {
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 20px;
+    padding: 10px;
     background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 95%;
 }
 
 .info-title {

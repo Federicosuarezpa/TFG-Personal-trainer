@@ -1,14 +1,21 @@
 import '../../styles/Profile.css';
 import useAuth from '../../shared/hooks/UseAuth.jsx';
-import {useState} from "react";
+import { useEffect, useState } from "react";
+import { getUserData, updateProfile } from "../../http/ApiConnection.js";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
-    const { userData } = useAuth();
-    const [error, setError] = useState(null); // Estado para el mensaje de error
-    const [male, setMale] = useState(false);
-    const [female, setFemale] = useState(false);
+    const navigate = useNavigate(); // Inicializa useHistory
+    const { userData: userId, signOut } = useAuth();
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+    const [userData, setUserData] = useState(null);
 
-
+    useEffect(() => {
+        getUserData(userId.id).then((data) => {
+            setUserData(data ? data["userInfo"] : {});
+        });
+    }, [userId]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -17,7 +24,7 @@ const Profile = () => {
         const address = event.target.address.value;
         const age = event.target.age.value;
         const gender = event.target.gender.value;
-        console.log(gender)
+
         if (gender === '') {
             setError('Please select gender');
             return;
@@ -29,13 +36,28 @@ const Profile = () => {
         }
 
         try {
-
+            await updateProfile( age, phone, address, gender);
+            setSuccess('Profile updated');
+            clearError();
         } catch (error) {
-            setError('Incorrect username or password.'); // Establece el mensaje de error
+            setError('Error updating profile');
         }
     };
 
+    const logout = () => {
+        try {
+            signOut();
+            navigate(`/`);
+        }catch (error) {
+            setError('Error logging out');
+        }
+
+    }
+
     const clearError = () => {
+        setError(null);
+    };
+    const clearSuccess = () => {
         setError(null);
     };
 
@@ -45,8 +67,7 @@ const Profile = () => {
                 <div className="profile-header">
                     <div className="profile-header-left">
                         <div className="profile-pic">
-                            <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg'
-                                 alt='Profile'/>
+                            <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg' alt='Profile'/>
                         </div>
                     </div>
                     <div className="profile-header-right">
@@ -57,10 +78,10 @@ const Profile = () => {
                     <div className="profile-sidebar">
                         <ul>
                             <li className='selected-option'>Personal data</li>
-                            <li><a href={`/health-data/${userData?.id}`}>Health data </a></li>
+                            <li><a href={`/health-data/`}>Health data</a></li>
                             <li>Diet plan</li>
                             <li>Training routine</li>
-                            <li>Logout</li>
+                            <li onClick={logout}>Logout</li>
                         </ul>
                     </div>
                     <div className="profile-content">
@@ -70,7 +91,7 @@ const Profile = () => {
                                 <input type="text" id="name" name="name" disabled={true} defaultValue={userData?.name}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="lastname"><strong>Name:</strong></label>
+                                <label htmlFor="lastname"><strong>Last Name:</strong></label>
                                 <input type="text" id="lastname" name="lastname" disabled={true}
                                        defaultValue={userData?.lastname}/>
                             </div>
@@ -101,10 +122,11 @@ const Profile = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="gender"><strong>Gender:</strong></label>
-                                <select id="gender" name="gender">
+                                <select id="gender" name="gender" value={userData?.gender || ''}
+                                        onChange={(e) => setUserData({...userData, gender: e.target.value})}>
                                     <option value="">Select Gender</option>
-                                    <option value="male" selected={male}>Male</option>
-                                    <option value="female" selected={female}>Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
                             <button type="submit" className="update-button">Update</button>
@@ -112,6 +134,11 @@ const Profile = () => {
                         {error && (
                             <div className="error-message" onClick={clearError}>
                                 {error}
+                            </div>
+                        )}
+                        {success && (
+                            <div className="success-message" onClick={clearSuccess}>
+                                {success}
                             </div>
                         )}
                         <div className="extra-options">

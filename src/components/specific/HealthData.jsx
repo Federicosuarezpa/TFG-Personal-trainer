@@ -1,9 +1,47 @@
 import '../../styles/Profile.css';
 import useAuth from '../../shared/hooks/UseAuth.jsx';
+import {useEffect, useState} from "react";
+import {createHealthData, getUserHealthData} from "../../http/ApiConnection.js";
 
 const Profile = () => {
-    const { userData } = useAuth();
+    const {userData} = useAuth();
+    const [weekData, setWeekData] = useState([]);
+    const [error, setError] = useState(null);
 
+    useEffect(() => {
+        getUserHealthData().then((data) => {
+            setWeekData(data ? data['formattedData'] : []);
+            console.log(data);
+        });
+    });
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const height = event.target.height.value;
+        const weight = event.target.weight.value;
+        const bodyfat = event.target.bodyfat.value;
+        const muscle = event.target.muscle.value;
+        const objective = event.target.objective.value;
+        const exercisefrequency = event.target.exercisefrequency.value;
+        const fileUpload = event.target.fileUpload.value;
+
+        if (!height || !weight || !exercisefrequency || !objective) {
+            setError('Height, weight, exercise frequency and objective are required');
+            return;
+        }
+        try {
+            const healthData = await createHealthData(height, weight, bodyfat, muscle, objective, exercisefrequency, fileUpload);
+            setWeekData([...weekData, healthData]);
+            clearError();
+        } catch (error) {
+            setError('Error creating health data');
+        }
+    };
+
+    const clearError = () => {
+        setError(null);
+    }
     return (
         <div className="profile-page">
             <div className="profile-container">
@@ -29,7 +67,7 @@ const Profile = () => {
                         </ul>
                     </div>
                     <div className="profile-content">
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="height"><strong>Height:</strong></label>
                                 <input type="text" id="height" name="height"
@@ -55,60 +93,66 @@ const Profile = () => {
                             <div className="form-group">
                                 <label htmlFor="exercisefrequency"><strong>Exercise frequency:</strong></label>
                                 <input type="text" id="exercisefrequency" name="exercisefrequency"
-                                       placeholder='Exercise frequency, for example 3 times a week'/>
+                                       placeholder='Exercise frequency, for example 3 times a week, just the number'/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="objective"><strong>Objective:</strong></label>
                                 <input type="text" id="objective" name="objective"
                                        placeholder='Objective, for example weight loss'/>
                             </div>
+                            <div className="form-group">
+                                <label htmlFor="fileUpload"><strong>Upload image of your body
+                                    (optional):</strong></label>
+                                <input type="file" id="fileUpload" name="fileUpload"/>
+                            </div>
                             <button type="submit" className="update-button">Create data for week 1</button>
                         </form>
+                        {error && (
+                            <div className="error-message" onClick={clearError}>
+                                {error}
+                            </div>
+                        )}
 
                         {/* Nueva sección para la información */}
                         <div className="info-grid">
-                            <div className="info-box">
-                                <div className="info-title">Week 1 data</div>
-                                <div className="info-content">
-                                    <div className="info-item">
-                                        <div className="info-label">Weight:</div>
-                                        <div className="info-text">70 kg</div>
+                            {weekData.map((week) => (
+                                <div key={week.week} className="info-box">
+                                    <div className="info-title">Week {week.week}</div>
+                                    <div className="info-content">
+                                        <div className="info-item">
+                                            <div className="info-label">Weight:</div>
+                                            <div className="info-text">{week.weight}</div>
+                                        </div>
+                                        <div className="info-item">
+                                            <div className="info-label">Height:</div>
+                                            <div className="info-text">{week.height}</div>
+                                        </div>
+                                        <div className="info-item">
+                                            <div className="info-label">Muscle:</div>
+                                            <div className="info-text">{week.muscle}%</div>
+                                        </div>
+                                        <div className="info-item">
+                                            <div className="info-label">Body fat:</div>
+                                            <div className="info-text">{week.bodyFat}%</div>
+                                        </div>
+                                        <div className="info-item">
+                                            <div className="info-label">Exercise frequency:</div>
+                                            <div className="info-text">{week.frequency}%</div>
+                                        </div>
+                                        <div className="info-item">
+                                            <div className="info-label">Objective:</div>
+                                            <div className="info-text">{week.objective}</div>
+                                        </div>
+                                        <div className="info-item">
+                                            <div className="info-label">Average calories burnt:</div>
+                                            <div className="info-text">{week.averageCaloriesBurnt}</div>
+                                        </div>
                                     </div>
-                                    <div className="info-item">
-                                        <div className="info-label">Text:</div>
-                                        <div className="info-text">Some additional information</div>
-                                    </div>
-                                    <div className="info-item">
-                                        <div className="info-label">Special:</div>
-                                        <div className="info-text">Details about special conditions</div>
+                                    <div className="info-footer">
+                                        <button className="edit-button">Edit</button>
                                     </div>
                                 </div>
-                                <div className="info-footer">
-                                    <button className="edit-button">Edit</button>
-                                </div>
-                            </div>
-                            {/* Repite el mismo bloque para otro cuadro */}
-                            <div className="info-box">
-                                <div className="info-title">Week 2 data</div>
-                                <div className="info-content">
-                                    <div className="info-item">
-                                        <div className="info-label">Weight:</div>
-                                        <div className="info-text">75 kg</div>
-                                    </div>
-                                    <div className="info-item">
-                                        <div className="info-label">Text:</div>
-                                        <div className="info-text">Some additional information</div>
-                                    </div>
-                                    <div className="info-item">
-                                        <div className="info-label">Special:</div>
-                                        <div className="info-text">Details about special conditions</div>
-                                    </div>
-                                </div>
-                                <div className="info-footer">
-                                    <button className="edit-button">Edit</button>
-                                </div>
-                            </div>
-                            {/* Añade más cuadros si es necesario */}
+                            ))}
                         </div>
                     </div>
                 </div>

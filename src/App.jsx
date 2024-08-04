@@ -46,7 +46,7 @@ function App() {
                                 <Profile />
                             </AuthUser>
                         } />
-                        <Route path="/health-data/:userId" element={
+                        <Route path="/health-data" element={
                             <AuthUser>
                                 <HealthData />
                             </AuthUser>

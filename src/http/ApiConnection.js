@@ -5,15 +5,16 @@ const requestMethods = { post: 'POST', get: 'GET', put: 'PUT', delete: 'DELETE' 
 const endpoints = {
     login: '/users/login',
     register: '/register',
-    users: '/users',
+    userUpdate: '/users/update-profile',
     recoverPassword: '/recover-password',
     resetPassword: '/reset-password',
+    getUserData: '/users/',
+    getUserHealthData: '/health/getAllUserHealthData',
+    createHealthData: '/health/addWeekData',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
-    let token = localStorage.getItem('token');
-    if (!token) token = sessionStorage.getItem('token');
-
+    const token = sessionStorage.getItem('token');
     const headers = new Headers();
     headers.append('Authorization', token);
 
@@ -49,13 +50,10 @@ async function fetchApi(path, { body, method, contentType = 'application/json', 
 }
 
 export async function login( email, password ) {
-    const tokenData = await fetchApi(endpoints.login, {
+    return await fetchApi(endpoints.login, {
         method: requestMethods.post,
-        body: { email, password },
+        body: {email, password},
     });
-    const token = tokenData.token;
-    localStorage.setItem('token', token);
-    return token;
 }
 
 export async function register( email, password, age, phone, address, name, lastname ) {
@@ -65,5 +63,33 @@ export async function register( email, password, age, phone, address, name, last
     });
     const token = tokenData.token;
     localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
     return token;
 }
+
+export async function updateProfile( age, phone, address, gender ) {
+    return await fetchApi(endpoints.userUpdate, {
+        method: requestMethods.post,
+        body: { age, phone, address, gender},
+    });
+}
+
+export async function getUserData( id ) {
+    return await fetchApi(endpoints.getUserData + `${id}`, {
+        method: requestMethods.get,
+    });
+}
+
+export async function getUserHealthData() {
+    return await fetchApi(endpoints.getUserHealthData, {
+        method: requestMethods.get,
+    });
+}
+
+export async function createHealthData( weight, height, muscle, bodyfat, image, objective, frequency ) {
+    return await fetchApi(endpoints.createHealthData, {
+        method: requestMethods.post,
+        body: { weight, height, muscle, bodyfat, image, objective, frequency },
+    });
+}
+
