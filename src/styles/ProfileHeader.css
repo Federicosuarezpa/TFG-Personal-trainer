@@ -1,0 +1,46 @@
+.profile-header {
+    display: flex;
+    align-items: center;
+}
+
+.profile-header-left {
+    position: relative;
+}
+
+.profile-pic {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: -10px;
+    left: 30px;
+    width: 50%;
+    height: auto;
+    display: none; /* Oculta el ícono por defecto */
+}
+
+.profile-pic:hover .camera-icon {
+    display: block; /* Muestra el ícono al pasar el ratón por encima */
+}
+
+.profile-pic {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* Añade una transición suave para el cambio de opacidad */
+}
+
+.profile-pic img {
+    display: block;
+    width: 100px; /* Ajusta el tamaño según sea necesario */
+    height: 100px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%;
+    transition: opacity 0.3s ease; /* Añade una transición suave para el cambio de opacidad */
+}
+
+.profile-pic:hover img {
+    opacity: 0.7; /* Ajusta la opacidad según sea necesario */
+}

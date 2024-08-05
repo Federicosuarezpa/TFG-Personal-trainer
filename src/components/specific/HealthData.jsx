@@ -2,9 +2,13 @@ import '../../styles/Profile.css';
 import useAuth from '../../shared/hooks/UseAuth.jsx';
 import {useEffect, useState} from "react";
 import {createHealthData, getUserHealthData} from "../../http/ApiConnection.js";
+import {useNavigate} from "react-router-dom";
+import ProfileHeader from "../common/ProfileHeader.jsx";
+import ProfileSidebar from "../common/ProfileSidebar.jsx";
 
 const Profile = () => {
-    const {userData} = useAuth();
+    const navigate = useNavigate(); // Inicializa useHistory
+    const {userData, signOut} = useAuth();
     const [weekData, setWeekData] = useState([]);
     const [error, setError] = useState(null);
 
@@ -23,7 +27,7 @@ const Profile = () => {
         const muscle = event.target.muscle.value;
         const objective = event.target.objective.value;
         const exercisefrequency = event.target.exercisefrequency.value;
-        const fileUpload = event.target.fileUpload.value;
+        const fileUpload = event.target.fileUpload.files[0];
 
         if (!height || !weight || !exercisefrequency || !objective) {
             setError('Height, weight, exercise frequency and objective are required');
@@ -47,30 +51,22 @@ const Profile = () => {
     const clearError = () => {
         setError(null);
     }
+
+    const logout = () => {
+        try {
+            signOut();
+            navigate(`/`);
+        }catch (error) {
+            setError('Error logging out');
+        }
+
+    }
     return (
         <div className="profile-page">
             <div className="profile-container">
-                <div className="profile-header">
-                    <div className="profile-header-left">
-                        <div className="profile-pic">
-                            <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg'
-                                 alt='Profile'/>
-                        </div>
-                    </div>
-                    <div className="profile-header-right">
-                        <div className="profile-title">Health data input</div>
-                    </div>
-                </div>
+                <ProfileHeader/>
                 <div className="profile-body">
-                    <div className="profile-sidebar">
-                        <ul>
-                            <li><a href={`/profile/${userData?.id}`}>Personal data </a></li>
-                            <li className='selected-option'>Health data</li>
-                            <li>Diet plan</li>
-                            <li>Training routine</li>
-                            <li>Logout</li>
-                        </ul>
-                    </div>
+                    <ProfileSidebar activeItem='health-data'/>
                     <div className="profile-content">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
@@ -101,16 +97,20 @@ const Profile = () => {
                                        placeholder='Exercise frequency, for example 3 times a week, just the number'/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="objective"><strong>Objective:</strong></label>
-                                <input type="text" id="objective" name="objective"
-                                       placeholder='Objective, for example weight loss'/>
+                                <label htmlFor="gender"><strong>Objective:</strong></label>
+                                <select id="objective" name="objective">
+                                    <option value="maintainWeight">Maintain weight</option>
+                                    <option value="loseWeight">Lose weight</option>
+                                    <option value="gainMuscle">Gain muscle</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="fileUpload"><strong>Upload image of your body
                                     (optional):</strong></label>
                                 <input type="file" id="fileUpload" name="fileUpload"/>
                             </div>
-                            <button type="submit" className="update-button">Create data for week 1</button>
+                            <button type="submit" className="update-button">Create data for
+                                week {weekData.length + 1}</button>
                         </form>
                         {error && (
                             <div className="error-message" onClick={clearError}>
@@ -124,13 +124,13 @@ const Profile = () => {
                                 <div key={week.week} className="info-box">
                                     <div className="info-title">Week {week.week}</div>
                                     <div className="info-content">
-                                        <div className="info-item">
+                                    <div className="info-item">
                                             <div className="info-label">Weight:</div>
-                                            <div className="info-text">{week.weight}</div>
+                                            <div className="info-text">{week.weight}Kg</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Height:</div>
-                                            <div className="info-text">{week.height}</div>
+                                            <div className="info-text">{week.height}m</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Muscle:</div>

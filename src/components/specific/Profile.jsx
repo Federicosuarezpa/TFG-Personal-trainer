@@ -3,10 +3,11 @@ import useAuth from '../../shared/hooks/UseAuth.jsx';
 import { useEffect, useState } from "react";
 import { getUserData, updateProfile } from "../../http/ApiConnection.js";
 import {useNavigate} from "react-router-dom";
+import ProfileHeader from "../common/ProfileHeader.jsx";
+import ProfileSidebar from "../common/ProfileSidebar.jsx";
 
 const Profile = () => {
-    const navigate = useNavigate(); // Inicializa useHistory
-    const { userData: userId, signOut } = useAuth();
+    const { userData: userId } = useAuth();
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -44,16 +45,6 @@ const Profile = () => {
         }
     };
 
-    const logout = () => {
-        try {
-            signOut();
-            navigate(`/`);
-        }catch (error) {
-            setError('Error logging out');
-        }
-
-    }
-
     const clearError = () => {
         setError(null);
     };
@@ -64,26 +55,9 @@ const Profile = () => {
     return (
         <div className="profile-page">
             <div className="profile-container">
-                <div className="profile-header">
-                    <div className="profile-header-left">
-                        <div className="profile-pic">
-                            <img src='https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg' alt='Profile'/>
-                        </div>
-                    </div>
-                    <div className="profile-header-right">
-                        <div className="profile-title">Profile</div>
-                    </div>
-                </div>
+                <ProfileHeader/>
                 <div className="profile-body">
-                    <div className="profile-sidebar">
-                        <ul>
-                            <li className='selected-option'>Personal data</li>
-                            <li><a href={`/health-data/`}>Health data</a></li>
-                            <li>Diet plan</li>
-                            <li>Training routine</li>
-                            <li onClick={logout}>Logout</li>
-                        </ul>
-                    </div>
+                    <ProfileSidebar activeItem='personal-data'/>
                     <div className="profile-content">
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">

@@ -86,10 +86,33 @@ export async function getUserHealthData() {
     });
 }
 
-export async function createHealthData( weight, height, muscle, bodyfat, objective, frequency, image ) {
-    return await fetchApi(endpoints.createHealthData, {
-        method: requestMethods.post,
-        body: { weight, height, muscle, bodyfat, objective, frequency, image },
+export async function createHealthData(weight, height, muscle, bodyfat, objective, frequency, image) {
+    const formData = new FormData();
+    formData.append('weight', weight);
+    formData.append('height', height);
+    formData.append('muscle', muscle);
+    formData.append('bodyfat', bodyfat);
+    formData.append('objective', objective);
+    formData.append('frequency', frequency);
+    if (image) {
+        formData.append('fileUpload', image);
+    }
+    console.log(formData.get('fileUpload'));
+
+    const response = await fetchFormData('/health/addWeekData', {
+        method: 'POST',
+        body: formData,
     });
+
+    return await response.json();
+}
+
+async function fetchFormData(path, { body, method }) {
+    let token = localStorage.getItem('token');
+    if (!token) token = sessionStorage.getItem('token');
+    const headers = new Headers();
+    headers.append('Authorization', token);
+
+    return await fetch(`${apiUrl}${path}`, { method, headers, body });
 }
 
