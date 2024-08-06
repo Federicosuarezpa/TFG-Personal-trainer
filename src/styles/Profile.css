@@ -278,6 +278,19 @@ input[type="radio"] + label {
     -moz-appearance: none;
     cursor: pointer;
 }
+.delete-button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 100%; /* Ocupa todo el ancho */
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: darkred;
+}
 
 
 

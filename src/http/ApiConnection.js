@@ -11,6 +11,8 @@ const endpoints = {
     getUserData: '/users/',
     getUserHealthData: '/health/getAllUserHealthData',
     createHealthData: '/health/addWeekData',
+    getProfileImage: '/users/getUserProfileImage',
+    uploadProfileImage: '/users/addProfileImage',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -47,6 +49,15 @@ async function fetchApi(path, { body, method, contentType = 'application/json', 
     }
 
     return responseData;
+}
+
+async function fetchFormData(path, { body, method }) {
+    let token = localStorage.getItem('token');
+    if (!token) token = sessionStorage.getItem('token');
+    const headers = new Headers();
+    headers.append('Authorization', token);
+
+    return await fetch(`${apiUrl}${path}`, { method, headers, body });
 }
 
 export async function login( email, password ) {
@@ -107,12 +118,21 @@ export async function createHealthData(weight, height, muscle, bodyfat, objectiv
     return await response.json();
 }
 
-async function fetchFormData(path, { body, method }) {
-    let token = localStorage.getItem('token');
-    if (!token) token = sessionStorage.getItem('token');
-    const headers = new Headers();
-    headers.append('Authorization', token);
-
-    return await fetch(`${apiUrl}${path}`, { method, headers, body });
+export async function getUserProfileImage() {
+    console.log('oh')
+    return await fetchApi(endpoints.getProfileImage, {
+        method: requestMethods.get,
+    });
 }
 
+export async function uploadProfileImage(image) {
+    const formData = new FormData();
+    formData.append('fileUpload', image);
+
+    const response = await fetchFormData(endpoints.uploadProfileImage, {
+        method: 'POST',
+        body: formData,
+    });
+
+    return await response.json();
+}

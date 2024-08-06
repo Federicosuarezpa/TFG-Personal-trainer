@@ -1,14 +1,10 @@
 import '../../styles/Profile.css';
-import useAuth from '../../shared/hooks/UseAuth.jsx';
 import {useEffect, useState} from "react";
 import {createHealthData, getUserHealthData} from "../../http/ApiConnection.js";
-import {useNavigate} from "react-router-dom";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
 
 const Profile = () => {
-    const navigate = useNavigate(); // Inicializa useHistory
-    const {userData, signOut} = useAuth();
     const [weekData, setWeekData] = useState([]);
     const [error, setError] = useState(null);
 
@@ -52,15 +48,6 @@ const Profile = () => {
         setError(null);
     }
 
-    const logout = () => {
-        try {
-            signOut();
-            navigate(`/`);
-        }catch (error) {
-            setError('Error logging out');
-        }
-
-    }
     return (
         <div className="profile-page">
             <div className="profile-container">
@@ -124,7 +111,7 @@ const Profile = () => {
                                 <div key={week.week} className="info-box">
                                     <div className="info-title">Week {week.week}</div>
                                     <div className="info-content">
-                                    <div className="info-item">
+                                        <div className="info-item">
                                             <div className="info-label">Weight:</div>
                                             <div className="info-text">{week.weight}Kg</div>
                                         </div>
@@ -155,6 +142,9 @@ const Profile = () => {
                                     </div>
                                     <div className="info-footer">
                                         <button className="edit-button">Edit</button>
+                                    </div>
+                                    <div className="info-footer">
+                                        <button className="delete-button">Delete</button>
                                     </div>
                                 </div>
                             ))}

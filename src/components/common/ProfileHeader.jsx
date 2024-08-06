@@ -1,31 +1,29 @@
 import '../../styles/ProfileHeader.css';
 import pencilIcon from "../../svg/pencil-edit-button-svgrepo-com.svg";
 import profileIcon from "../../svg/profile-user-svgrepo-com.svg";
+import {useEffect, useState} from "react";
+import {getUserProfileImage, uploadProfileImage} from "../../http/ApiConnection.js";
 const ProfileHeader = () => {
+    const [image, setImage] = useState(null);
+
     const handleFileChange = (event) => {
-        const file = event.target.files[0];  // Obtén el archivo seleccionado
+        const file = event.target.files[0];
         if (file) {
-            // Puedes hacer algo con el archivo aquí, como cargarlo en el servidor
-            console.log('Selected file:', file);
-
-            // Ejemplo de cómo podrías subir el archivo
-            // const formData = new FormData();
-            // formData.append('fileUpload', file);
-
-            // fetch('/upload-endpoint', {
-            //     method: 'POST',
-            //     body: formData,
-            // })
-            // .then(response => response.json())
-            // .then(data => console.log('Upload successful:', data))
-            // .catch(error => console.error('Upload error:', error));
+            uploadProfileImage(file).then((data) => {
+                setImage(data['fileUrl']);
+            });
         }
     };
+    useEffect(() => {
+        getUserProfileImage().then((data) => {
+            setImage(data ? data['fileUrl'] : profileIcon);
+        });
+    }, []);
     return (
         <div className="profile-header">
             <div className="profile-header-left">
                 <div className="profile-pic" onClick={() => document.getElementById('fileInput').click()}>
-                    <img src={profileIcon} className="profile-pic"
+                    <img src={image ? image : profileIcon} className="profile-pic"
                          alt='Profile'/>
                     <input
                         type="file"
