@@ -1,16 +1,19 @@
 import '../../styles/Profile.css';
 import {useEffect, useState} from "react";
-import {createHealthData, getUserHealthData} from "../../http/ApiConnection.js";
+import {createHealthData, getUserHealthData, removeWeekData} from "../../http/ApiConnection.js";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
 
-const Profile = () => {
+const HealthData = () => {
     const [weekData, setWeekData] = useState([]);
     const [error, setError] = useState(null);
+    const [lastWeek, setLastWeek] = useState(1);
 
     useEffect(() => {
         getUserHealthData().then((data) => {
             setWeekData(data ? data['formattedData'] : []);
+            const lastWeekCreated = data ? data['formattedData'][data['formattedData'].length()] : 1;
+            setLastWeek(lastWeekCreated);
         });
     }, []);
 
@@ -48,10 +51,21 @@ const Profile = () => {
         setError(null);
     }
 
+    const removeWeek = async (weekId) => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this week\'s data?');
+
+        if (isConfirmed) {
+            await removeWeekData(weekId);
+            await updateHealthData();
+        } else {
+            console.log('Deletion canceled');
+        }
+    };
+
     return (
         <div className="profile-page">
             <div className="profile-container">
-                <ProfileHeader/>
+                <ProfileHeader title={'Health data'}/>
                 <div className="profile-body">
                     <ProfileSidebar activeItem='health-data'/>
                     <div className="profile-content">
@@ -97,7 +111,7 @@ const Profile = () => {
                                 <input type="file" id="fileUpload" name="fileUpload"/>
                             </div>
                             <button type="submit" className="update-button">Create data for
-                                week {weekData.length + 1}</button>
+                                week {lastWeek}</button>
                         </form>
                         {error && (
                             <div className="error-message" onClick={clearError}>
@@ -144,7 +158,7 @@ const Profile = () => {
                                         <button className="edit-button">Edit</button>
                                     </div>
                                     <div className="info-footer">
-                                        <button className="delete-button">Delete</button>
+                                        <button className="delete-button" onClick={() => removeWeek(week.week)}>Delete</button>
                                     </div>
                                 </div>
                             ))}
@@ -156,4 +170,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default HealthData;

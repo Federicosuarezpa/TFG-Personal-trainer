@@ -9,11 +9,11 @@ const Header = ({ onLoginClick }) => {
 
     return (
         <header className="header">
-            <div className="logo-header">PERSONAL AI GENERATOR</div>
+            <div className="logo-header"><a href="/">PERSONAL AI GENERATOR</a></div>
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#about">About us</a></li>
+                    <li><a href="#about">Plan example</a></li>
                     <UserNotLogged>
                         <li>
                             <a href='#login' onClick={(e) => {
@@ -25,7 +25,7 @@ const Header = ({ onLoginClick }) => {
                         </li>
                     </UserNotLogged>
                     <LoggedUser>
-                        <li><a href={`/profile/${userData?.id}`}>Profile</a></li>
+                        <li><a href={`/profile`}>Profile</a></li>
                     </LoggedUser>
                 </ul>
             </nav>

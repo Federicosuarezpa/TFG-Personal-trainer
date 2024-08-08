@@ -5,14 +5,14 @@ import UseAuth from "../../shared/hooks/UseAuth";
 import { useNavigate } from "react-router-dom";
 
 const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
-    const navigate = useNavigate(); // Inicializa useHistory
-    const [error, setError] = useState(null); // Estado para el mensaje de error
+    const navigate = useNavigate();
+    const [error, setError] = useState(null);
+
+    const { signIn } = UseAuth();
 
     if (!isVisible) {
         return null;
     }
-
-    const { signIn } = UseAuth();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,14 +22,19 @@ const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
 
         try {
             const token = await signIn(email, password);
-            console.log('Login successful:', { email, token });
+            if(!token || token.error) {
+                setError(token.error || 'Error logging in.');
+                return;
+            }
             onClose();
-            navigate(`/profile/${token.id}`);
+            navigate(`/profile`);
         } catch (error) {
             console.error('Login failed:', error);
             setError('Incorrect username or password.'); // Establece el mensaje de error
         }
     };
+
+
 
     const clearError = () => {
         setError(null); // Función para limpiar el mensaje de error
@@ -41,7 +46,7 @@ const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
                 <h2>Log in</h2>
                 <button className="close-button" onClick={onClose}>×</button>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="username"><strong>Username</strong></label>
+                    <label htmlFor="username"><strong>Email</strong></label>
                     <input className="input-login" type="text" id="username" name="username" placeholder='Username' required/>
                     <label htmlFor="password"><strong>Password</strong></label>
                     <input className="input-login" type="password" id="password" name="password" placeholder='Password' required/>

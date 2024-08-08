@@ -3,8 +3,8 @@ import pencilIcon from "../../svg/pencil-edit-button-svgrepo-com.svg";
 import profileIcon from "../../svg/profile-user-svgrepo-com.svg";
 import {useEffect, useState} from "react";
 import {getUserProfileImage, uploadProfileImage} from "../../http/ApiConnection.js";
-const ProfileHeader = () => {
-    const [image, setImage] = useState(null);
+const ProfileHeader = ({title}) => {
+    const [image, setImage] = useState();
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -16,14 +16,14 @@ const ProfileHeader = () => {
     };
     useEffect(() => {
         getUserProfileImage().then((data) => {
-            setImage(data ? data['fileUrl'] : profileIcon);
+            setImage(data ? data['fileUrl'] : null);
         });
     }, []);
     return (
         <div className="profile-header">
             <div className="profile-header-left">
                 <div className="profile-pic" onClick={() => document.getElementById('fileInput').click()}>
-                    <img src={image ? image : profileIcon} className="profile-pic"
+                    <img src={image || profileIcon} className="profile-pic"
                          alt='Profile'/>
                     <input
                         type="file"
@@ -38,7 +38,7 @@ const ProfileHeader = () => {
                 </div>
             </div>
             <div className="profile-header-right">
-                <div className="profile-title">Profile</div>
+                <div className="profile-title">{title}</div>
             </div>
         </div>
     );

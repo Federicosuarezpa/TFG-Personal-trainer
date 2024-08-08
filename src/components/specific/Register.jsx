@@ -2,9 +2,13 @@ import '../../styles/RegisterModal.css';
 import PropTypes from "prop-types";
 import {useState} from "react";
 import UseAuth from "../../shared/hooks/UseAuth.jsx";
+import {useNavigate} from "react-router-dom";
+import useAuth from "../../shared/hooks/UseAuth.jsx";
 
 const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const { userData: userId, signUp } = useAuth();
 
     if (!isVisible) {
         return null;
@@ -12,7 +16,6 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { signUp } = UseAuth();
 
         const username = event.target.username.value;
         const lastname = event.target.lastname.value;
@@ -28,8 +31,14 @@ const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
                 setError('Passwords do not match.');
                 return;
             }
-            await signUp(email, password, age, username, address, phone, lastname);
-            console.log('Register successful:', { username, email });
+            const response = await signUp(email, password, age, username, address, phone, lastname);
+            if (!response || response.error) {
+                setError(response.error || 'Error creating account.');
+            } else {
+                console.log('Register successful:', { email, response });
+                onClose();
+                navigate(`/profile`);
+            }
         } catch (error) {
             console.error('Register failed:', error);
             setError('Incorrect username or password.');

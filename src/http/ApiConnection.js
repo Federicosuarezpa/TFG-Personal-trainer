@@ -4,7 +4,7 @@ const requestMethods = { post: 'POST', get: 'GET', put: 'PUT', delete: 'DELETE' 
 
 const endpoints = {
     login: '/users/login',
-    register: '/register',
+    register: '/users/register',
     userUpdate: '/users/update-profile',
     recoverPassword: '/recover-password',
     resetPassword: '/reset-password',
@@ -13,6 +13,9 @@ const endpoints = {
     createHealthData: '/health/addWeekData',
     getProfileImage: '/users/getUserProfileImage',
     uploadProfileImage: '/users/addProfileImage',
+    removeWeekData: '/health/deleteInfo',
+    deleteUserAccount: '/users/deleteUser',
+    getAllDietPlans: '/diet/getAllDietPlans',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -67,11 +70,14 @@ export async function login( email, password ) {
     });
 }
 
-export async function register( email, password, age, phone, address, name, lastname ) {
-    const tokenData = await fetchApi(endpoints.login, {
+export async function register( email, password, age, name, address, phone, lastname ) {
+    const tokenData = await fetchApi(endpoints.register, {
         method: requestMethods.post,
         body: { email, password, age, phone, address, name, lastname },
     });
+    if (!tokenData.token) {
+        return { error: tokenData.message };
+    }
     const token = tokenData.token;
     localStorage.setItem('token', token);
     sessionStorage.setItem('token', token);
@@ -97,6 +103,13 @@ export async function getUserHealthData() {
     });
 }
 
+export async function getAllDietPlans() {
+    return await fetchApi(endpoints.getAllDietPlans, {
+        method: requestMethods.get,
+    });
+}
+
+
 export async function createHealthData(weight, height, muscle, bodyfat, objective, frequency, image) {
     const formData = new FormData();
     formData.append('weight', weight);
@@ -119,7 +132,6 @@ export async function createHealthData(weight, height, muscle, bodyfat, objectiv
 }
 
 export async function getUserProfileImage() {
-    console.log('oh')
     return await fetchApi(endpoints.getProfileImage, {
         method: requestMethods.get,
     });
@@ -135,4 +147,16 @@ export async function uploadProfileImage(image) {
     });
 
     return await response.json();
+}
+
+export async function removeWeekData(weekId) {
+    return await fetchApi(endpoints.removeWeekData + `/${weekId}`, {
+        method: requestMethods.post,
+    });
+}
+
+export async function deleteUserAccount() {
+    return await fetchApi(endpoints.deleteUserAccount, {
+        method: requestMethods.post,
+    });
 }

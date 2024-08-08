@@ -153,6 +153,13 @@ li a {
     gap: 20px;
 }
 
+.info-grid-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+}
+
+
 .info-box {
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -291,6 +298,100 @@ input[type="radio"] + label {
 .delete-button:hover {
     background-color: darkred;
 }
+
+.day-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.day-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.day-content {
+    display: grid;
+    gap: 8px;
+}
+
+.day-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.day-label {
+    font-weight: bold;
+}
+
+.day-text {
+    font-style: italic;
+}
+
+.day-footer {
+    margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+    .day-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Estilo para el título */
+    .day-title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Contenedor para el contenido */
+    .day-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Estilo para cada ítem de la lista */
+    .day-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    /* Estilo para los subtítulos */
+    .day-subtitle {
+        font-weight: bold;
+    }
+
+    /* Estilo para los textos */
+    .day-text {
+        word-wrap: break-word; /* Asegura que el texto largo se ajuste al ancho del contenedor */
+    }
+
+    /* Estilo para los botones */
+    .day-footer {
+        display: flex;
+        gap: 10px;
+    }
+}
+
+
+
+
+
 
 
 

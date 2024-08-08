@@ -1,8 +1,7 @@
 import decodeTokenData from "../utils/DecodeTokenData.jsx";
-import React, {useEffect} from "react";
-import { useState } from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types'; // Importa PropTypes
-import { login, register } from '../../http/ApiConnection';
+import {login, register} from '../../http/ApiConnection';
 
 export const AuthContext = React.createContext();
 const AuthContextProvider = AuthContext.Provider;
@@ -19,6 +18,9 @@ export function AuthProvider({ children }) {
     // Métodos de autenticación y gestión de usuario
     const signIn = async (email, password) => {
         const loginData = await login(email, password);
+        if (!loginData.token) {
+            return { error: loginData.message };
+        }
         sessionStorage.setItem('token', loginData.token);
         console.log(token)
         const tokenObject = decodeTokenData(loginData.token);
@@ -27,9 +29,15 @@ export function AuthProvider({ children }) {
         return tokenObject;
     };
 
-    const signUp = async (name, email, password, age, address, phone, lastname) => {
-        const message = await register(email, password, age, name, address, phone, lastname);
-        return message;
+    const signUp = async (email, password, age, username, address, phone, lastname) => {
+        const response = await register(email, password, age, username, address, phone, lastname);
+        if (!response || response.error) {
+            return { error: response.error };
+        }
+        const tokenObject = decodeTokenData(response);
+        setUserData(tokenObject);
+        setIsUserLogged(true);
+        return tokenObject;
     };
 
     const signOut = () => {

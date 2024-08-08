@@ -1,13 +1,14 @@
 import '../../styles/Profile.css';
 import useAuth from '../../shared/hooks/UseAuth.jsx';
 import { useEffect, useState } from "react";
-import { getUserData, updateProfile } from "../../http/ApiConnection.js";
+import {deleteUserAccount, getUserData, updateProfile} from "../../http/ApiConnection.js";
 import {useNavigate} from "react-router-dom";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
 
 const Profile = () => {
-    const { userData: userId } = useAuth();
+    const navigate = useNavigate();
+    const { userData: userId, signOut } = useAuth();
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [userData, setUserData] = useState(null);
@@ -51,11 +52,22 @@ const Profile = () => {
     const clearSuccess = () => {
         setError(null);
     };
+    const deleteAccount = async () => {
+        const isConfirmed = window.confirm('Are you sure you want to delete your account?');
+
+        if (isConfirmed) {
+            await deleteUserAccount();
+            signOut();
+            navigate(`/`);
+        } else {
+            // Do nothing
+        }
+    }
 
     return (
         <div className="profile-page">
             <div className="profile-container">
-                <ProfileHeader/>
+                <ProfileHeader title={'Profile'}/>
                 <div className="profile-body">
                     <ProfileSidebar activeItem='personal-data'/>
                     <div className="profile-content">
@@ -116,7 +128,7 @@ const Profile = () => {
                             </div>
                         )}
                         <div className="extra-options">
-                            <p className="forgot-password">Delete account</p>
+                            <p className="forgot-password" onClick={deleteAccount}>Delete account</p>
                         </div>
                     </div>
                 </div>

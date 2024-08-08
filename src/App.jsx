@@ -8,9 +8,10 @@ import { useState } from "react";
 import Register from "./components/specific/Register.jsx";
 import Profile from "./components/specific/Profile.jsx";
 import { AuthProvider } from "./shared/context/AuthContext.jsx";
-import LoggedUser from "./components/security/LoggedUser.jsx";
 import AuthUser from "./components/security/AuthUser.jsx";
 import HealthData from "./components/specific/HealthData.jsx";
+import DietPlan from "./components/specific/DietPlan.jsx";
+import NotFound from "./components/specific/NotFound.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -41,7 +42,7 @@ function App() {
                 <main>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/profile/:userId" element={
+                        <Route path="/profile" element={
                             <AuthUser>
                                 <Profile />
                             </AuthUser>
@@ -51,6 +52,12 @@ function App() {
                                 <HealthData />
                             </AuthUser>
                         } />
+                        <Route path="/diet-plan" element={
+                            <AuthUser>
+                                <DietPlan />
+                            </AuthUser>
+                        } />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </main>
                 <Footer />

@@ -18,13 +18,13 @@ const ProfileSidebar = ({ activeItem }) => {
         <div className="profile-sidebar">
             <ul>
                 <li className={activeItem === 'personal-data' ? 'selected-option' : ''}>
-                    <a href={`/profile/${userData.id}`}>Personal data</a>
+                    <a href={`/profile`}>Personal data</a>
                 </li>
                 <li className={activeItem === 'health-data' ? 'selected-option' : ''}>
                     <a href={`/health-data/`}>Health data</a>
                 </li>
                 <li className={activeItem === 'diet-plan' ? 'selected-option' : ''}>
-                    Diet plan
+                    <a href={`/diet-plan/`}>Diet plan</a>
                 </li>
                 <li className={activeItem === 'training-routine' ? 'selected-option' : ''}>
                     Training routine

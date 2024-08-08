@@ -8,5 +8,5 @@ export default function LoggedUser({ children }) {
 }
 
 LoggedUser.propTypes = {
-    children: PropTypes.node.isRequired,  // Acepta cualquier nodo React
+    children: PropTypes.node.isRequired,
 };
