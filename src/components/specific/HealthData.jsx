@@ -12,7 +12,7 @@ const HealthData = () => {
     useEffect(() => {
         getUserHealthData().then((data) => {
             setWeekData(data ? data['formattedData'] : []);
-            const lastWeekCreated = data ? data['formattedData'][data['formattedData'].length()] : 1;
+            const lastWeekCreated = data ? data['formattedData'][data['formattedData'].length] : 1;
             setLastWeek(lastWeekCreated);
         });
     }, []);

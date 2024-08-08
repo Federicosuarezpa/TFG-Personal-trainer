@@ -10,9 +10,37 @@
     color: #333; /* Dark text color */
 }
 
+/* Estilos generales para los enlaces */
+a {
+    color: #333; /* Color de texto por defecto */
+    text-decoration: none; /* Quita el subrayado por defecto */
+}
+
+/* Estilo para enlaces cuando el cursor está sobre ellos */
+a:hover {
+    color: #007bff; /* Color al pasar el ratón sobre el enlace */
+    text-decoration: underline; /* Opcional: subrayado al pasar el ratón */
+}
+
+/* Estilo para enlaces visitados */
+a:visited {
+    color: #555; /* Color para enlaces que ya han sido visitados */
+}
+
+/* Estilo para enlaces activos (cuando están siendo clickeados) */
+a:active {
+    color: #0056b3; /* Color cuando el enlace está siendo clickeado */
+}
+
+/* Enlaces dentro de elementos con clase específica */
+.profile-sidebar li a {
+    color: inherit; /* Hereda el color del elemento contenedor */
+}
+
+
 .profile-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1500px;
     min-height: calc(100vh - 100px);
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -27,26 +55,22 @@
     border-bottom: 1px solid #ccc;
 }
 
+.profile-pic-mobile {
+    display: none;
+}
+.profile-header-left, .profile-header-right {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .profile-header-left {
     width: 20%;
-    padding: 11.7px;
-    align-items: center;
-    display: flex;
 }
+
 .profile-header-right {
     flex: 1; /* Each section will take up equal space */
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-
-.profile-header-left {
-    justify-content: center;
-}
-
-.profile-header-right {
-    justify-content: center;
 }
 
 .profile-pic {
@@ -78,6 +102,7 @@
     border-right: 1px solid #ccc;
     padding: 20px;
     background-color: #f9f9f9;
+    display: block; /* Muestra el menú lateral en pantallas grandes */
 }
 
 .profile-sidebar ul {
@@ -101,6 +126,7 @@
 .profile-content {
     width: 80%;
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 .form-group {
@@ -114,51 +140,86 @@
     color: #333; /* Dark text color */
 }
 
-.form-group input {
-    width: 100%; /* Make input take full width */
+.form-group input, .form-group select {
+    width: 100%; /* Make input/select take full width */
     padding: 8px;
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: black;
+}
+
+.update-button, .edit-button, .delete-button {
+    width: 100%; /* Make button take full width */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .update-button {
-    width: 100%; /* Make button take full width */
-    padding: 10px 20px;
     background-color: #007bff;
     color: white;
-    border: none;
-    cursor: pointer;
     margin-top: 10px;
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
 .update-button:hover {
     background-color: #0056b3;
 }
 
-li a {
-    color: inherit;
+.update-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
-/* Profile.css */
+.update-button .progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background-color: #28a745; /* Color de la barra de carga */
+    width: 0;
+    transition: width 2s ease; /* Ajusta la duración de la animación */
+    z-index: -1; /* Asegura que la barra de carga esté detrás del texto */
+}
 
-.profile-content {
-    /* Asegúrate de que haya un margen superior para separar del botón */
-    margin-bottom: 20px;
+.update-button.generating .progress-bar {
+    width: 100%;
+}
+
+.update-button.generating {
+    background-color: #28a745; /* Color cuando el botón está en carga */
+}
+
+.edit-button {
+    background-color: #666; /* Gris más oscuro */
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #555; /* Gris más oscuro al pasar el ratón */
+}
+
+.delete-button {
+    background-color: red;
+    color: #fff;
+}
+
+.delete-button:hover {
+    background-color: darkred;
 }
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
 .info-grid-1 {
-    display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 20px;
 }
-
 
 .info-box {
     border: 1px solid #ddd;
@@ -207,101 +268,8 @@ li a {
     margin-bottom: 10px;
 }
 
-.edit-button {
-    background-color: #666; /* Gris más oscuro */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    width: 100%; /* Ocupa todo el ancho */
-    cursor: pointer;
-}
-
-.edit-button:hover {
-    background-color: #555; /* Gris más oscuro al pasar el ratón */
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-select, input[type="select"] {
-    margin-right: 0.5rem;
-}
-
-input[type="radio"] + label {
-    margin-right: 1rem;
-}
-
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 1rem;
-    box-sizing: border-box;
-    color: black;
-}
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 1rem;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
-}
-
-.form-group select {
-    height: 40px;
-    padding: 8px;
-}
-
-.form-group {
-    position: relative;
-}
-
-.form-group {
-    position: relative;
-}
-
-.form-group select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    font-size: 1rem;
-    box-sizing: border-box;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-}
-.delete-button {
-    background-color: red;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    width: 100%; /* Ocupa todo el ancho */
-    cursor: pointer;
-}
-
-.delete-button:hover {
-    background-color: darkred;
-}
-
 .day-info {
     display: grid;
-    grid-template-columns: 1fr;
     gap: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -327,71 +295,160 @@ input[type="radio"] + label {
 
 .day-label {
     font-weight: bold;
+    white-space: nowrap; /* Evita el salto de línea en las etiquetas */
+    overflow: hidden;
 }
 
 .day-text {
     font-style: italic;
+    font-size: 16px;
+    align-items: flex-end;
 }
 
-.day-footer {
-    margin-top: 10px;
+.dropdown-button {
+    display: none;
+}
+.dropdown-option {
+    display: none;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1300px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .day-info {
-        display: flex;
         flex-direction: column;
-        gap: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 10px;
-        background-color: #f9f9f9;
         max-width: 100%;
-        box-sizing: border-box;
     }
 
-    /* Estilo para el título */
-    .day-title {
-        font-size: 1.5em;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    /* Contenedor para el contenido */
     .day-content {
-        display: flex;
         flex-direction: column;
-        gap: 8px;
     }
 
-    /* Estilo para cada ítem de la lista */
     .day-item {
-        display: flex;
         flex-direction: column;
-        gap: 4px;
     }
 
-    /* Estilo para los subtítulos */
-    .day-subtitle {
-        font-weight: bold;
-    }
-
-    /* Estilo para los textos */
     .day-text {
         word-wrap: break-word; /* Asegura que el texto largo se ajuste al ancho del contenedor */
     }
 
-    /* Estilo para los botones */
     .day-footer {
         display: flex;
         gap: 10px;
     }
 }
 
+@media (max-width: 768px) {
+    .profile-content {
+        max-width: 100%; /* Ajusta el tamaño del contenido en pantallas móviles */
+    }
 
+    .dropdown-button {
+        display: block; /* Muestra el botón de dropdown en pantallas móviles */
+    }
+}
 
+@media (max-width: 500px) {
+    .profile-sidebar {
+        display: none; /* Oculta el menú lateral en pantallas móviles */
+    }
 
+    .profile-header-right {
+        position: relative; /* Permite que el dropdown se posicione correctamente */
+        flex: 1; /* Asegura que el contenedor tome el espacio restante */
+        display: flex;
+        align-items: center; /* Alinea verticalmente los elementos al centro */
+        justify-content: space-between; /* Distribuye el espacio entre los elementos */
+        padding: 20px;
+    }
+    .profile-content{
+        width: 100%;
+    }
 
+    .profile-pic {
+        display: none;
+    }
 
+    .profile-header-left {
+        display: none;
+    }
 
+    .dropdown-option {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        display: flex; /* Usa flexbox para alinear la imagen si es necesario */
+        align-items: center; /* Alinea verticalmente el contenido */
+        justify-content: flex-start; /* Alinea el contenido a la izquierda */
+        width: auto; /* Ajusta el ancho según el contenido */
+    }
+
+    .dropdown-image {
+        width: 20px;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    /* Estilo para el contenedor del desplegable en pantallas móviles */
+    .fullscreen-dropdown {
+        position: fixed; /* Fija el contenedor en la pantalla */
+        top: 0;
+        left: 0;
+        width: 100vw; /* Ocupa el ancho completo de la pantalla */
+        height: 100vh; /* Ocupa el alto completo de la pantalla */
+        background-color: #f9f9f9; /* Color de fondo */
+        border: none;
+        box-shadow: none; /* Sin sombra */
+        z-index: 1000; /* Asegura que esté encima de otros elementos */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra horizontalmente el contenido */
+        justify-content: center; /* Centra verticalmente el contenido */
+        overflow: auto; /* Agrega desplazamiento si el contenido es demasiado alto */
+    }
+
+    /* Estilo para el contenido del desplegable */
+    .dropdown-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Espacio entre los enlaces */
+        width: 100%; /* Ocupa el ancho completo del contenedor */
+        max-width: 400px; /* Ancho máximo para el contenido */
+        text-align: center; /* Centra el texto de los enlaces */
+    }
+
+    .dropdown-content a {
+        color: #333; /* Color del texto de los enlaces */
+        text-decoration: none; /* Sin subrayado en los enlaces */
+        font-size: 18px; /* Tamaño del texto */
+        padding: 15px;
+        border-radius: 4px; /* Bordes redondeados */
+        transition: background-color 0.3s; /* Transición suave para el fondo */
+        display: block; /* Asegura que cada enlace ocupe su propio bloque */
+    }
+
+    /* Cambia el color de fondo al pasar el ratón sobre los enlaces */
+    .dropdown-content a:hover {
+        background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
+    }
+
+    .dropdown-content .close-button-option {
+        color: red;
+    }
+    .profile-pic-mobile {
+        display: block;
+        width: 100px;
+        height: 100px;
+        background-color: #ddd;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .profile-pic-mobile img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}
 

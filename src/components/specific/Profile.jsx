@@ -1,10 +1,17 @@
 import '../../styles/Profile.css';
 import useAuth from '../../shared/hooks/UseAuth.jsx';
 import { useEffect, useState } from "react";
-import {deleteUserAccount, getUserData, updateProfile} from "../../http/ApiConnection.js";
+import {
+    deleteUserAccount,
+    getUserData,
+    getUserProfileImage,
+    updateProfile,
+    uploadProfileImage
+} from "../../http/ApiConnection.js";
 import {useNavigate} from "react-router-dom";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
+import profileIcon from "../../svg/profile-user-svgrepo-com.svg";
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -12,12 +19,24 @@ const Profile = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
     const [userData, setUserData] = useState(null);
+    const [image, setImage] = useState();
+
 
     useEffect(() => {
         getUserData(userId.id).then((data) => {
             setUserData(data ? data["userInfo"] : {});
+        }).catch(error => {
+            console.error('Error fetching user data:', error);
         });
     }, [userId]);
+
+    useEffect(() => {
+        getUserProfileImage().then((data) => {
+            setImage(data ? data['fileUrl'] : null);
+        }).catch(error => {
+            console.error('Error fetching user profile image:', error);
+        });
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,7 +57,7 @@ const Profile = () => {
         }
 
         try {
-            await updateProfile( age, phone, address, gender);
+            await updateProfile(age, phone, address, gender);
             setSuccess('Profile updated');
             clearError();
         } catch (error) {
@@ -49,20 +68,39 @@ const Profile = () => {
     const clearError = () => {
         setError(null);
     };
+
     const clearSuccess = () => {
-        setError(null);
+        setSuccess(null);
     };
+
     const deleteAccount = async () => {
         const isConfirmed = window.confirm('Are you sure you want to delete your account?');
 
         if (isConfirmed) {
-            await deleteUserAccount();
-            signOut();
-            navigate(`/`);
+            try {
+                await deleteUserAccount();
+                signOut();
+                navigate(`/`);
+            } catch (error) {
+                console.error('Error deleting account:', error);
+            }
         } else {
-            // Do nothing
+            console.log('Deletion canceled');
         }
-    }
+    };
+
+    const handleMobileFileChange = async (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            try {
+                const data = await uploadProfileImage(file);
+                setImage(data ? data['fileUrl'] : null);
+            } catch (error) {
+                console.error('Error uploading image:', error);
+            }
+        }
+    };
+
 
     return (
         <div className="profile-page">
@@ -72,6 +110,15 @@ const Profile = () => {
                     <ProfileSidebar activeItem='personal-data'/>
                     <div className="profile-content">
                         <form onSubmit={handleSubmit}>
+                            <div className="profile-pic-mobile" onClick={() => document.getElementById('fileInputMobile').click()}>
+                                <img src={ image || profileIcon} className="profile-pic-mobile" alt='Profile'/>
+                                <input
+                                    type="file"
+                                    id="fileInputMobile"
+                                    style={{display: 'none'}}
+                                    onChange={handleMobileFileChange}
+                                />
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="name"><strong>Name:</strong></label>
                                 <input type="text" id="name" name="name" disabled={true} defaultValue={userData?.name}/>
