@@ -35,7 +35,7 @@ function App() {
     const closeRegister = () => {
         setIsRegisterVisible(false);
     };
-
+    const test = 'test';
     return (
         <Router>
             <AuthProvider>
