@@ -12,6 +12,7 @@ import AuthUser from "./components/security/AuthUser.jsx";
 import HealthData from "./components/specific/HealthData.jsx";
 import DietPlan from "./components/specific/DietPlan.jsx";
 import NotFound from "./components/specific/NotFound.jsx";
+import TrainingGenerator from "./components/specific/TrainingGenerator.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -55,6 +56,11 @@ function App() {
                         <Route path="/diet-plan" element={
                             <AuthUser>
                                 <DietPlan />
+                            </AuthUser>
+                        } />
+                        <Route path="/training-generator" element={
+                            <AuthUser>
+                                <TrainingGenerator />
                             </AuthUser>
                         } />
                         <Route path="*" element={<NotFound />} />

@@ -1,12 +1,12 @@
 // src/pages/DietPlan.js
 import { useState, useEffect } from 'react';
 import '../../styles/Profile.css';
-import {addDiet, deleteDietPlan, generateNewDiet, getAllDietPlans, removeWeekData} from "../../http/ApiConnection.js";
+import {addDiet, deleteDietPlan, generateNewDiet, getAllDietPlans} from "../../http/ApiConnection.js";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
 import ProgressBar from './ProgressBar.jsx';
 
-const DietPlan = () => {
+const TrainingGenerator = () => {
     const [dietPlan, setDietPlan] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -72,23 +72,11 @@ const DietPlan = () => {
     return (
         <div className="profile-page">
             <div className="profile-container">
-                <ProfileHeader title={'Diet generator'} />
+                <ProfileHeader title={'Training generator'} />
                 <div className="profile-body">
-                    <ProfileSidebar activeItem='diet-plan' />
+                    <ProfileSidebar activeItem='training-generator' />
                     <div className="profile-content">
                         <form onSubmit={handleGenerateDietPlan}>
-                            <div className="form-group">
-                                <label htmlFor="allergies"><strong>Allergies:</strong></label>
-                                <input type="text" id="allergies" name="allergies" placeholder='Ex. Lactose, gluten, nuts...' />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="foodLike"><strong>Food preferences:</strong></label>
-                                <input type="text" id="foodLike" name="foodLike" placeholder='Ex. Vegetarian, vegan, keto, paleo...' />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="foodDislike"><strong>Food that you don't like:</strong></label>
-                                <input type="text" id="foodDislike" name="foodDislike" placeholder='Ex. Fish, chicken, salmon...' />
-                            </div>
                             <button type="submit" className={`update-button ${loading ? 'generating' : ''}`} disabled={loading}>
                                 {loading ? 'Generating...' : 'Generate diet plan based on your last health report'}
                             </button>
@@ -143,4 +131,4 @@ const DietPlan = () => {
     );
 };
 
-export default DietPlan;
+export default TrainingGenerator;

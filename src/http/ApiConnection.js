@@ -16,6 +16,9 @@ const endpoints = {
     removeWeekData: '/health/deleteInfo',
     deleteUserAccount: '/users/deleteUser',
     getAllDietPlans: '/diet/getAllDietPlans',
+    generateDiet: '/diet/generateDiet',
+    removeDietPlan: '/diet/deleteDietPlan',
+    addDietPlan: '/diet/addDiet',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -157,6 +160,26 @@ export async function removeWeekData(weekId) {
 
 export async function deleteUserAccount() {
     return await fetchApi(endpoints.deleteUserAccount, {
+        method: requestMethods.post,
+    });
+}
+
+export async function generateNewDiet(allergies, foodDislike, foodLike) {
+    return await fetchApi(endpoints.generateDiet, {
+        method: requestMethods.post,
+        body: { allergies, foodDislike, foodLike },
+    });
+}
+
+
+export async function deleteDietPlan(mealPlanHash) {
+    return await fetchApi(endpoints.removeDietPlan + `/${mealPlanHash}`, {
+        method: requestMethods.delete,
+    });
+}
+
+export async function addDiet(mealPlanHash) {
+    return await fetchApi(endpoints.addDietPlan + `/${mealPlanHash}`, {
         method: requestMethods.post,
     });
 }

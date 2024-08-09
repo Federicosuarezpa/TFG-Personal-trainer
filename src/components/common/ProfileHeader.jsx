@@ -4,10 +4,15 @@ import profileIcon from "../../svg/profile-user-svgrepo-com.svg";
 import dropdownIcon from "../../svg/align-justify-svgrepo-com.svg";
 import { useEffect, useState } from "react";
 import { getUserProfileImage, uploadProfileImage } from "../../http/ApiConnection.js";
+import {useNavigate} from "react-router-dom";
+import useAuth from "../../shared/hooks/UseAuth.jsx";
+import PropTypes from "prop-types";
 
 const ProfileHeader = ({ title }) => {
     const [image, setImage] = useState();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const navigate = useNavigate();
+    const { signOut } = useAuth();
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -26,6 +31,15 @@ const ProfileHeader = ({ title }) => {
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const logout = () => {
+        try {
+            signOut();
+            navigate(`/`);
+        } catch (error) {
+            console.log('Error logging out');
+        }
     };
 
     return (
@@ -56,8 +70,9 @@ const ProfileHeader = ({ title }) => {
                     <div className="dropdown-content">
                         <a href="/profile">Profile</a>
                         <a href="/health-data">Health Data</a>
-                        <a href="/diet-plan">Diet Plan</a>
-                        <a href="/logout">Log out</a>
+                        <a href="/diet-plan">Diet Generator</a>
+                        <a href="/training-generator">Training Generator</a>
+                        <a onClick={logout}>Log out</a>
                         <a className="close-button-option" onClick={toggleDropdown}>Close menu</a>
                     </div>
                 </div>
@@ -65,5 +80,10 @@ const ProfileHeader = ({ title }) => {
         </div>
     );
 };
+
+ProfileHeader.propTypes = {
+    title: PropTypes.string,
+};
+
 
 export default ProfileHeader;
