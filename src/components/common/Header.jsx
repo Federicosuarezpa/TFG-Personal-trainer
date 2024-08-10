@@ -9,7 +9,7 @@ const Header = ({ onLoginClick }) => {
 
     return (
         <header className="header">
-            <div className="logo-header"><a href="/">PERSONAL AI GENERATOR</a></div>
+            <div className="logo-header"><a href="/">PERSONAL AI TRAINER</a></div>
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>

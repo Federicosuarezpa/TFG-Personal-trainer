@@ -119,7 +119,6 @@ const HealthData = () => {
                             </div>
                         )}
 
-                        {/* Nueva sección para la información */}
                         <div className="info-grid">
                             {weekData.map((week) => (
                                 <div key={week.week} className="info-box">
@@ -135,11 +134,11 @@ const HealthData = () => {
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Muscle:</div>
-                                            <div className="info-text">{week.muscle}%</div>
+                                            <div className="info-text">{week.muscle}{week.muscle ? '%' : null}</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Body fat:</div>
-                                            <div className="info-text">{week.bodyFat}%</div>
+                                            <div className="info-text">{week.bodyFat}{week.bodyfat ? '%': null}</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Exercise frequency:</div>

@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'https://backend.fedesuarezpa.com/api';
 
 const requestMethods = { post: 'POST', get: 'GET', put: 'PUT', delete: 'DELETE' };
 
