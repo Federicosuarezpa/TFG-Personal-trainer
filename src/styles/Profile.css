@@ -129,6 +129,12 @@ a:active {
     margin-bottom: 20px;
 }
 
+.profile-content-example {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
 .form-group {
     margin-bottom: 15px;
     width: 100%;

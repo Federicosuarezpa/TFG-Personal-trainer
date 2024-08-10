@@ -19,6 +19,7 @@ const endpoints = {
     generateDiet: '/diet/generateDiet',
     removeDietPlan: '/diet/deleteDietPlan',
     addDietPlan: '/diet/addDiet',
+    getDietExample: '/diet/getExampleDiet',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -181,5 +182,11 @@ export async function deleteDietPlan(mealPlanHash) {
 export async function addDiet(mealPlanHash) {
     return await fetchApi(endpoints.addDietPlan + `/${mealPlanHash}`, {
         method: requestMethods.post,
+    });
+}
+
+export async function getDietExample() {
+    return await fetchApi(endpoints.getDietExample, {
+        method: requestMethods.get,
     });
 }

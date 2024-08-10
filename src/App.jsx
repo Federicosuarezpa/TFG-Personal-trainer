@@ -13,6 +13,7 @@ import HealthData from "./components/specific/HealthData.jsx";
 import DietPlan from "./components/specific/DietPlan.jsx";
 import NotFound from "./components/specific/NotFound.jsx";
 import TrainingGenerator from "./components/specific/TrainingGenerator.jsx";
+import DietPlanExample from "./components/specific/DietPlanExample.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -63,7 +64,9 @@ function App() {
                                 <TrainingGenerator />
                             </AuthUser>
                         } />
+                        <Route path="/diet-example" element={<DietPlanExample />} />
                         <Route path="*" element={<NotFound />} />
+
                     </Routes>
                 </main>
                 <Footer />

@@ -132,21 +132,25 @@ const HealthData = () => {
                                             <div className="info-label">Height:</div>
                                             <div className="info-text">{week.height}m</div>
                                         </div>
-                                        <div className="info-item">
-                                            <div className="info-label">Muscle:</div>
-                                            <div className="info-text">{week.muscle}{week.muscle ? '%' : null}</div>
-                                        </div>
-                                        <div className="info-item">
-                                            <div className="info-label">Body fat:</div>
-                                            <div className="info-text">{week.bodyFat}{week.bodyfat ? '%': null}</div>
-                                        </div>
+                                        {week.muscle && (
+                                            <div className="info-item">
+                                                <div className="info-label">Muscle:</div>
+                                                <div className="info-text">{week.muscle}</div>
+                                            </div>
+                                        )}
+                                        {week.bodyfat && (
+                                            <div className="info-item">
+                                                <div className="info-label">Body fat:</div>
+                                                <div className="info-text">{week.bodyFat}</div>
+                                            </div>
+                                        )}
                                         <div className="info-item">
                                             <div className="info-label">Exercise frequency:</div>
                                             <div className="info-text">{week.exerciseFrequency} times per week</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Objective:</div>
-                                            <div className="info-text">{week.objective}</div>
+                                            <div className="info-text">{week.objective === 'loseWeight' ? 'Lose weight' : week.objective === 'gainMuscle' ? 'Gain muscle' : 'Maintain weight'}</div>
                                         </div>
                                         <div className="info-item">
                                             <div className="info-label">Average calories burnt:</div>

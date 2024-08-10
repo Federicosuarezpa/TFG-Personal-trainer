@@ -13,7 +13,7 @@ const Header = ({ onLoginClick }) => {
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="#about">Plan example</a></li>
+                    <li><a href="/diet-example">Plan example</a></li>
                     <UserNotLogged>
                         <li>
                             <a href='#login' onClick={(e) => {
