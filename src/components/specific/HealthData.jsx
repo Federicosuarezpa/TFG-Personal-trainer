@@ -3,11 +3,14 @@ import {useEffect, useState} from "react";
 import {createHealthData, getUserHealthData, removeWeekData} from "../../http/ApiConnection.js";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
+import EditHealthData from "./EditHealthData.jsx";
 
 const HealthData = () => {
     const [weekData, setWeekData] = useState([]);
     const [error, setError] = useState(null);
     const [lastWeek, setLastWeek] = useState(1);
+    const [isVisibleEditWeek, setIsVisibleEditWeek] = useState(false);
+    const [selectedWeek, setSelectedWeek] = useState(null);
 
     useEffect(() => {
         getUserHealthData().then((data) => {
@@ -26,7 +29,6 @@ const HealthData = () => {
         const muscle = event.target.muscle.value;
         const objective = event.target.objective.value;
         const exercisefrequency = event.target.exercisefrequency.value;
-        const fileUpload = event.target.fileUpload.files[0];
 
         if (!height || !weight || !exercisefrequency || !objective) {
             setError('Height, weight, exercise frequency and objective are required');
@@ -60,6 +62,17 @@ const HealthData = () => {
         } else {
             console.log('Deletion canceled');
         }
+    };
+
+    const handleEditWeek = (week) => {
+        setSelectedWeek(week);
+        setIsVisibleEditWeek(true);
+    };
+
+    const handleCloseModal = async () => {
+        setIsVisibleEditWeek(false);
+        setSelectedWeek(null);
+        await updateHealthData();
     };
 
     return (
@@ -104,11 +117,6 @@ const HealthData = () => {
                                     <option value="loseWeight">Lose weight</option>
                                     <option value="gainMuscle">Gain muscle</option>
                                 </select>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="fileUpload"><strong>Upload image of your body
-                                    (optional):</strong></label>
-                                <input type="file" id="fileUpload" name="fileUpload"/>
                             </div>
                             <button type="submit" className="update-button">Create data for
                                 week {lastWeek}</button>
@@ -158,11 +166,18 @@ const HealthData = () => {
                                         </div>
                                     </div>
                                     <div className="info-footer">
-                                        <button className="edit-button">Edit</button>
+                                        <button className="edit-button" onClick={() => handleEditWeek(week.week)}>Edit</button>
                                     </div>
                                     <div className="info-footer">
                                         <button className="delete-button" onClick={() => removeWeek(week.week)}>Delete</button>
                                     </div>
+                                    {isVisibleEditWeek && (
+                                        <EditHealthData
+                                            onClose={handleCloseModal}
+                                            week={selectedWeek}
+                                            isVisible={isVisibleEditWeek}
+                                        />
+                                    )}
                                 </div>
                             ))}
                         </div>

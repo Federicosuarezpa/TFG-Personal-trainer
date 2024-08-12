@@ -97,6 +97,12 @@ a:active {
     flex: 1; /* Make the body take up remaining space */
 }
 
+.profile-body-example {
+    display: flex;
+    flex: 1; /* Make the body take up remaining space */
+    width: 100%;
+}
+
 .profile-sidebar {
     width: 20%;
     border-right: 1px solid #ccc;

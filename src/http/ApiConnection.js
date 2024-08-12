@@ -7,19 +7,22 @@ const endpoints = {
     register: '/users/register',
     userUpdate: '/users/update-profile',
     recoverPassword: '/recover-password',
-    resetPassword: '/reset-password',
+    resetPassword: '/users/reset-password',
     getUserData: '/users/',
-    getUserHealthData: '/health/getAllUserHealthData',
-    createHealthData: '/health/addWeekData',
-    getProfileImage: '/users/getUserProfileImage',
-    uploadProfileImage: '/users/addProfileImage',
-    removeWeekData: '/health/deleteInfo',
-    deleteUserAccount: '/users/deleteUser',
-    getAllDietPlans: '/diet/getAllDietPlans',
-    generateDiet: '/diet/generateDiet',
-    removeDietPlan: '/diet/deleteDietPlan',
-    addDietPlan: '/diet/addDiet',
-    getDietExample: '/diet/getExampleDiet',
+    getUserHealthData: '/health/get-all-user-health-data',
+    createHealthData: '/health/add-week-data',
+    getProfileImage: '/users/get-user-profile-image',
+    uploadProfileImage: '/users/add-profile-image',
+    removeWeekData: '/health/delete-info',
+    deleteUserAccount: '/users/delete-user',
+    getAllDietPlans: '/diet/get-all-diet-plans',
+    generateDiet: '/diet/generate-diet',
+    removeDietPlan: '/diet/delete-diet-plan',
+    addDietPlan: '/diet/add-diet',
+    getDietExample: '/diet/get-example-diet',
+    changePassword: '/users/change-password',
+    getUserHealthDataByWeek: '/health/get-week-info',
+    updateWeekData: '/health/modify-week-data',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -114,7 +117,7 @@ export async function getAllDietPlans() {
 }
 
 
-export async function createHealthData(weight, height, muscle, bodyfat, objective, frequency, image) {
+export async function createHealthData(weight, height, muscle, bodyfat, objective, frequency) {
     const formData = new FormData();
     formData.append('weight', weight);
     formData.append('height', height);
@@ -122,10 +125,6 @@ export async function createHealthData(weight, height, muscle, bodyfat, objectiv
     formData.append('bodyfat', bodyfat);
     formData.append('objective', objective);
     formData.append('frequency', frequency);
-    if (image) {
-        formData.append('fileUpload', image);
-    }
-    console.log(formData.get('fileUpload'));
 
     const response = await fetchFormData('/health/addWeekData', {
         method: 'POST',
@@ -188,5 +187,32 @@ export async function addDiet(mealPlanHash) {
 export async function getDietExample() {
     return await fetchApi(endpoints.getDietExample, {
         method: requestMethods.get,
+    });
+}
+
+export async function recoverPassword(email) {
+    return await fetchApi(endpoints.resetPassword, {
+        method: requestMethods.post,
+        body: { email },
+    });
+}
+
+export async function changePassword(token, password) {
+    return await fetchApi(endpoints.changePassword, {
+        method: requestMethods.post,
+        body: { token, password },
+    });
+}
+
+export async function getUserHealthDataByWeek(week) {
+    return await fetchApi(endpoints.getUserHealthDataByWeek + `/${week}`, {
+        method: requestMethods.get,
+    });
+}
+
+export async function updateWeekData(weight, height, muscle, bodyfat, objective, frequency, week) {
+    return await fetchApi(endpoints.updateWeekData + `/${week}`, {
+        method: requestMethods.put,
+        body: { weight, height, muscle, bodyfat, objective, frequency },
     });
 }

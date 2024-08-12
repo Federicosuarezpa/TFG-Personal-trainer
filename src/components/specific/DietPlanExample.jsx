@@ -15,7 +15,7 @@ const DietPlanExample = () => {
     return (
         <div className="profile-page">
             <div className="profile-container">
-                <div className="profile-body">
+                <div className="profile-body-example">
                     <div className="profile-content-example">
                         {dietPlan.length > 0 && (
                             <div className="week-info">

@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
             return { error: loginData.message };
         }
         sessionStorage.setItem('token', loginData.token);
-        console.log(token)
         const tokenObject = decodeTokenData(loginData.token);
         setUserData(tokenObject);
         setIsUserLogged(true);

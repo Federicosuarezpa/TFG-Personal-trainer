@@ -14,13 +14,19 @@ import DietPlan from "./components/specific/DietPlan.jsx";
 import NotFound from "./components/specific/NotFound.jsx";
 import TrainingGenerator from "./components/specific/TrainingGenerator.jsx";
 import DietPlanExample from "./components/specific/DietPlanExample.jsx";
+import RecoverPassword from "./components/specific/RecoverPassword.jsx";
+import NewPasswordCreator from "./components/specific/NewPasswordCreator.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isRegisterVisible, setIsRegisterVisible] = useState(false);
+    const [isRemindPasswordVisible, setIsRemindPasswordVisible] = useState(false);
+    const [isRegeneratePasswordVisible, setIsRegeneratePasswordVisible] = useState(false);
 
     const openModal = () => {
         setIsRegisterVisible(false);
+        setIsRegeneratePasswordVisible(false);
+        setIsRemindPasswordVisible(false);
         setIsModalVisible(true);
     };
 
@@ -36,6 +42,25 @@ function App() {
     const closeRegister = () => {
         setIsRegisterVisible(false);
     };
+
+    const openRemindPassword = () => {
+        setIsModalVisible(false);
+        setIsRegeneratePasswordVisible(false);
+        setIsRemindPasswordVisible(true);
+    };
+
+    const closeOpenReminder = () => {
+        setIsRemindPasswordVisible(false);
+    };
+
+    const openRegeneratePassword = () => {
+        setIsRemindPasswordVisible(false);
+        setIsRegeneratePasswordVisible(true);
+    }
+
+    const closeRegeneratePassword = () => {
+        setIsRegeneratePasswordVisible(false);
+    }
 
     return (
         <Router>
@@ -70,8 +95,10 @@ function App() {
                     </Routes>
                 </main>
                 <Footer />
-                <Login isVisible={isModalVisible} onClose={closeModal} onSwitchToRegister={openRegister} />
+                <Login isVisible={isModalVisible} onClose={closeModal} onSwitchToRegister={openRegister} onSwitchToReminder={openRemindPassword} />
                 <Register isVisible={isRegisterVisible} onClose={closeRegister} onSwitchToLogin={openModal} />
+                <RecoverPassword isVisible={isRemindPasswordVisible} onClose={closeOpenReminder} onSwitchToRegenerate={openRegeneratePassword} onSwitchToLogin={openModal} />
+                <NewPasswordCreator onSwitchToReminder={openRemindPassword} onClose={closeRegeneratePassword} onSwitchToLogin={openModal} isVisible={isRegeneratePasswordVisible} />
             </AuthProvider>
         </Router>
     );

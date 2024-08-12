@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import UseAuth from "../../shared/hooks/UseAuth";
 import { useNavigate } from "react-router-dom";
 
-const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
+const LoginModal = ({ isVisible, onClose, onSwitchToRegister, onSwitchToReminder }) => {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -30,7 +30,7 @@ const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
             navigate(`/profile`);
         } catch (error) {
             console.error('Login failed:', error);
-            setError('Incorrect username or password.'); // Establece el mensaje de error
+            setError('Incorrect username or password.');
         }
     };
 
@@ -59,7 +59,7 @@ const LoginModal = ({ isVisible, onClose, onSwitchToRegister }) => {
                 )}
                 <div className="extra-options">
                     <p className="create-account" onClick={onSwitchToRegister}>Create new account</p>
-                    <p className="forgot-password">Can't log in?</p>
+                    <p className="forgot-password" onClick={onSwitchToReminder}>Can't log in?</p>
                 </div>
             </div>
         </div>
@@ -70,6 +70,7 @@ LoginModal.propTypes = {
     isVisible: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onSwitchToRegister: PropTypes.func.isRequired,
+    onSwitchToReminder: PropTypes.func.isRequired,
 };
 
 export default LoginModal;
