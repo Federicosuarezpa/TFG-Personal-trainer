@@ -59,7 +59,7 @@ const LoginModal = ({ isVisible, onClose, onSwitchToRegister, onSwitchToReminder
                 )}
                 <div className="extra-options">
                     <p className="create-account" onClick={onSwitchToRegister}>Create new account</p>
-                    <p className="forgot-password" onClick={onSwitchToReminder}>Can't log in?</p>
+                    <p className="forgot-password" onClick={onSwitchToReminder}>Can not log in?</p>
                 </div>
             </div>
         </div>

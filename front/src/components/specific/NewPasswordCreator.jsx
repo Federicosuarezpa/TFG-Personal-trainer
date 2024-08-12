@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import '../../styles/LoginModal.css';
 import PropTypes from "prop-types";
-import UseAuth from "../../shared/hooks/UseAuth";
-import { useNavigate } from "react-router-dom";
 import {changePassword} from "../../http/ApiConnection.js";
 
 const NewPasswordCreator = ({ isVisible, onClose, onSwitchToLogin, onSwitchToReminder }) => {
-    const navigate = useNavigate();
     const [error, setError] = useState(null);
-
-    const { signIn } = UseAuth();
 
     if (!isVisible) {
         return null;

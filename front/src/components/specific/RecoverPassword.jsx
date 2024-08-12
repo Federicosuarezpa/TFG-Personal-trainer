@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import '../../styles/LoginModal.css';
 import PropTypes from "prop-types";
-import UseAuth from "../../shared/hooks/UseAuth";
-import { useNavigate } from "react-router-dom";
 import {recoverPassword} from "../../http/ApiConnection.js";
 
 const RecoverPassword = ({ isVisible, onClose, onSwitchToRegenerate, onSwitchToLogin }) => {

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../../styles/ProgressBar.css';
 import PropTypes from "prop-types";
-import LoginModal from "./Login.jsx";
 
 const ProgressBar = ({ loading, complete, onComplete }) => {
     const [progress, setProgress] = useState(0);
@@ -39,8 +38,8 @@ const ProgressBar = ({ loading, complete, onComplete }) => {
             }, 2000);
         }
 
-        return () => clearInterval(interval);
-    }, [loading, complete, onComplete]);
+        return () => clearInterval(Number(interval));
+    }, [loading, complete, onComplete, interval]);
 
     const calculateStep = (currentProgress) => {
         const maxStep = 0.9;

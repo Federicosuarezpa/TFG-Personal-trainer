@@ -1,7 +1,7 @@
 // src/pages/DietPlan.js
 import { useState, useEffect } from 'react';
 import '../../styles/Profile.css';
-import {addDiet, deleteDietPlan, generateNewDiet, getAllDietPlans, removeWeekData} from "../../http/ApiConnection.js";
+import {addDiet, deleteDietPlan, generateNewDiet, getAllDietPlans} from "../../http/ApiConnection.js";
 import ProfileHeader from "../common/ProfileHeader.jsx";
 import ProfileSidebar from "../common/ProfileSidebar.jsx";
 import ProgressBar from './ProgressBar.jsx';
@@ -86,7 +86,7 @@ const DietPlan = () => {
                                 <input type="text" id="foodLike" name="foodLike" placeholder='Ex. Vegetarian, vegan, keto, paleo...' />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="foodDislike"><strong>Food that you don't like:</strong></label>
+                                <label htmlFor="foodDislike"><strong>Food that you do not like:</strong></label>
                                 <input type="text" id="foodDislike" name="foodDislike" placeholder='Ex. Fish, chicken, salmon...' />
                             </div>
                             <button type="submit" className={`update-button ${loading ? 'generating' : ''}`} disabled={loading}>

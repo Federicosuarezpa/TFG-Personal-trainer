@@ -1,8 +1,6 @@
 import {useEffect, useState} from 'react';
 import '../../styles/LoginModal.css';
 import PropTypes from "prop-types";
-import UseAuth from "../../shared/hooks/UseAuth";
-import { useNavigate } from "react-router-dom";
 import { getUserHealthDataByWeek, updateWeekData } from "../../http/ApiConnection.js";
 
 const EditHealthData = ({ isVisible, onClose, week }) => {

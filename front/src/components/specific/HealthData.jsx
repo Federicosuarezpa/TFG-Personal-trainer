@@ -35,7 +35,7 @@ const HealthData = () => {
             return;
         }
         try {
-            await createHealthData(weight, height, muscle, bodyfat, objective, exercisefrequency, fileUpload);
+            await createHealthData(weight, height, muscle, bodyfat, objective, exercisefrequency);
             await updateHealthData();
             clearError();
         } catch (error) {

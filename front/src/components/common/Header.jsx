@@ -2,11 +2,8 @@ import PropTypes from 'prop-types';
 import '../../styles/Header.css';
 import UserNotLogged from "../security/NotUserLogged.jsx";
 import LoggedUser from "../security/LoggedUser.jsx";
-import useAuth from "../../shared/hooks/UseAuth.jsx";
 
 const Header = ({ onLoginClick }) => {
-    const { userData } = useAuth();
-
     return (
         <header className="header">
             <div className="logo-header"><a href="/">PERSONAL AI TRAINER</a></div>
@@ -16,7 +13,7 @@ const Header = ({ onLoginClick }) => {
                     <li><a href="/diet-example">Plan example</a></li>
                     <UserNotLogged>
                         <li>
-                            <a href='#login' onClick={(e) => {
+                            <a onClick={(e) => {
                                 e.preventDefault();
                                 onLoginClick();
                             }}>

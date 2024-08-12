@@ -11,7 +11,6 @@ const tokenObject = decodeTokenData(token);
 
 
 export function AuthProvider({ children }) {
-    // Estado local para gestionar datos de usuario y estado de autenticación
     const [userData, setUserData] = useState(tokenObject);
     const [isUserLogged, setIsUserLogged] = useState(!!tokenObject);
 
@@ -46,33 +45,15 @@ export function AuthProvider({ children }) {
         setIsUserLogged(false);
     };
 
-    const recoverPass = async (email) => {
-        const message = ''
-        return message;
-    };
-
-    const resetPassword = async (recovertoken, password, confirmPassword) => {
-        const message = ''
-        return message;
-    };
-
-    const updateInfoUser = async (data) => {
-        const message = ''
-        return message;
-    };
-
     return (
         <AuthContextProvider
             value={{
                 token,
-                updateInfoUser,
                 userData,
                 signIn,
                 signOut,
                 signUp,
-                isUserLogged,
-                recoverPass,
-                resetPassword,
+                isUserLogged
             }}
         >
             {children}

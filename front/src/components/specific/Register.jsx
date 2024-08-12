@@ -1,14 +1,13 @@
 import '../../styles/RegisterModal.css';
 import PropTypes from "prop-types";
 import {useState} from "react";
-import UseAuth from "../../shared/hooks/UseAuth.jsx";
 import {useNavigate} from "react-router-dom";
 import useAuth from "../../shared/hooks/UseAuth.jsx";
 
 const RegisterModal = ({ isVisible, onClose, onSwitchToLogin }) => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const { userData: userId, signUp } = useAuth();
+    const { signUp } = useAuth();
 
     if (!isVisible) {
         return null;

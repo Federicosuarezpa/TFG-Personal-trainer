@@ -1,4 +1,10 @@
-.env
+back/.env
 node_modules
 .idea/
 package-lock.json
+front/node_modules
+front/.idea/
+front/package-lock.json
+back/node_modules
+back/.idea/
+back/package-lock.json

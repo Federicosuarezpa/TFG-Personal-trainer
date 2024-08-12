@@ -53,7 +53,7 @@ export default function SpecificHome() {
                     </div>
                     <div className="testimonial-item">
                         <img src={imageThirdTestimonial} alt="Testimonial 3" className="testimonial-image"/>
-                        <p className="testimonial-text">The community support is amazing. I've achieved more than I
+                        <p className="testimonial-text">The community support is amazing. I have achieved more than I
                             thought possible thanks to this program!</p>
                         <p className="testimonial-name">- Michaela Brown</p>
                     </div>

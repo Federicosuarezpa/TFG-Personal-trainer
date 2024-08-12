@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../shared/hooks/UseAuth.jsx";
+import PropTypes from "prop-types";
 
 const ProfileSidebar = ({ activeItem }) => {
     const navigate = useNavigate();
-    const { signOut, userData } = useAuth();
+    const { signOut } = useAuth();
 
     const logout = () => {
         try {
@@ -34,5 +35,9 @@ const ProfileSidebar = ({ activeItem }) => {
         </div>
     );
 };
+
+ProfileSidebar.propTypes = {
+    activeItem: PropTypes.string.isRequired,
+}
 
 export default ProfileSidebar;
