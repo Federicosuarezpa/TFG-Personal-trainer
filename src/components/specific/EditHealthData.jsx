@@ -37,7 +37,7 @@ const EditHealthData = ({ isVisible, onClose, week }) => {
             return;
         }
         try {
-            const response = await updateWeekData(weight, height, muscle, bodyfat, objective, exercisefrequency, fileUpload);
+            const response = await updateWeekData(weight, height, muscle, bodyfat, objective, exercisefrequency);
             if (!response || response.error) {
                 setError(response.error || 'Error updating health data.');
                 return;
