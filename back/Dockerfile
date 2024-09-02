@@ -16,7 +16,7 @@ COPY uploads ./uploads
 COPY .env-docker ./.env
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 5139
 
 # Run the app
 CMD ["npm", "start"]
