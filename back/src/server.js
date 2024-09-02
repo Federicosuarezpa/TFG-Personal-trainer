@@ -29,10 +29,8 @@ app.use('/api/diet', dietGeneratorRoutes);
 app.use('/api/health', usersHealthInfoRoutes);
 app.use('/api/training', trainingPlanGeneratorRoutes);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.get('/health-check', (req, res) => {
+    res.send('Server working!')
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+app.listen(port, () => {})
