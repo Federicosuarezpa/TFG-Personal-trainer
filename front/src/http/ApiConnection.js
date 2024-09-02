@@ -23,6 +23,11 @@ const endpoints = {
     changePassword: '/users/change-password',
     getUserHealthDataByWeek: '/health/get-week-info',
     updateWeekData: '/health/modify-week-data',
+    generatePlan: '/training/generate-plan',
+    getAllTrainingPlans: '/training/get-all-training-plans',
+    deleteTrainingPlan: '/training/delete-training-plan',
+    addTrainingPlan: '/training/add-training-plan',
+    getTrainingPlanByWeek: '/training/get-training-plan-by-week',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -170,6 +175,38 @@ export async function generateNewDiet(allergies, foodDislike, foodLike) {
         body: { allergies, foodDislike, foodLike },
     });
 }
+
+export async function generateNewTrainingPlan() {
+    return await fetchApi(endpoints.generatePlan, {
+        method: requestMethods.post,
+    });
+}
+
+export async function deleteTrainingPlan(trainingPlanHash) {
+    return await fetchApi(endpoints.deleteTrainingPlan + `/${trainingPlanHash}`, {
+        method: requestMethods.delete,
+    });
+}
+
+export async function addTrainingPlan(trainingPlanHash) {
+    return await fetchApi(endpoints.addTrainingPlan + `/${trainingPlanHash}`, {
+        method: requestMethods.post,
+    });
+}
+
+export async function getAllTrainingPlans() {
+    return await fetchApi(endpoints.getAllTrainingPlans, {
+        method: requestMethods.get,
+    });
+}
+
+export async function getTrainingPlanByWeek(week) {
+    return await fetchApi(endpoints.getTrainingPlanByWeek + `/${week}`, {
+        method: requestMethods.get,
+    });
+}
+
+
 
 
 export async function deleteDietPlan(mealPlanHash) {

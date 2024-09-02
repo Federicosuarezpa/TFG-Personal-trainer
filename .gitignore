@@ -8,3 +8,5 @@ front/package-lock.json
 back/node_modules
 back/.idea/
 back/package-lock.json
+back/.env
+back/.env-docker

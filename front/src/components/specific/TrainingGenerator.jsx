@@ -78,7 +78,7 @@ const TrainingGenerator = () => {
                     <div className="profile-content">
                         <form onSubmit={handleGenerateDietPlan}>
                             <button type="submit" className={`update-button ${loading ? 'generating' : ''}`} disabled={loading}>
-                                {loading ? 'Generating...' : 'Generate diet plan based on your last health report'}
+                                {loading ? 'Generating...' : 'Generate training plan based on your last health report'}
                             </button>
                         </form>
                         <ProgressBar loading={loading} complete={complete} />

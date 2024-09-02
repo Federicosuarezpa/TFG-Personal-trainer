@@ -13,4 +13,12 @@ npm run dev &
 
 cd ..
 
+cd python-back || exit
+echo "Starting python backend..."
+python3 index.py &
+
+echo "All services started"
+
+cd ..
+
 wait
