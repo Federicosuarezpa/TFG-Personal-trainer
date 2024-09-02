@@ -3,7 +3,7 @@
 - NodeJS.
 - Docker.
 - Mysql.
-- Access to Open AI API.
+- Access to Open AI API and API key to make requests.
 
 # Installation
 1. Clone the repository.
