@@ -31,7 +31,7 @@ const ProfileSidebar = ({ activeItem }) => {
                     < a href={`/training-generator/`}>Training Generator</a>
                 </li>
                 <li className={activeItem === 'week-plan' ? 'selected-option' : ''}>
-                    < a href={`/week-plan/`}>Week plan</a>
+                    < a href={`/week-plan/1`}>Week plan</a>
                 </li>
                 <li onClick={logout}>Logout</li>
             </ul>

@@ -16,6 +16,7 @@ import TrainingGenerator from "./components/specific/TrainingGenerator.jsx";
 import DietPlanExample from "./components/specific/DietPlanExample.jsx";
 import RecoverPassword from "./components/specific/RecoverPassword.jsx";
 import NewPasswordCreator from "./components/specific/NewPasswordCreator.jsx";
+import WeekPlan from "./components/specific/WeekPlan.jsx";
 
 function App() {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -89,9 +90,13 @@ function App() {
                                 <TrainingGenerator />
                             </AuthUser>
                         } />
+                        <Route path="/week-plan/:id" element={
+                            <AuthUser>
+                                <WeekPlan />
+                            </AuthUser>
+                        } />
                         <Route path="/diet-example" element={<DietPlanExample />} />
                         <Route path="*" element={<NotFound />} />
-
                     </Routes>
                 </main>
                 <Footer />

@@ -28,6 +28,7 @@ const endpoints = {
     deleteTrainingPlan: '/training/delete-training-plan',
     addTrainingPlan: '/training/add-training-plan',
     getTrainingPlanByWeek: '/training/get-training-plan-by-week',
+    getDietPlanByWeek: '/diet/get-diet-plan-by-week',
 }
 
 async function fetchApi(path, { body, method, contentType = 'application/json', checkError = true }) {
@@ -189,6 +190,7 @@ export async function deleteTrainingPlan(trainingPlanHash) {
 }
 
 export async function addTrainingPlan(trainingPlanHash) {
+    console.log(trainingPlanHash);
     return await fetchApi(endpoints.addTrainingPlan + `/${trainingPlanHash}`, {
         method: requestMethods.post,
     });
@@ -206,7 +208,11 @@ export async function getTrainingPlanByWeek(week) {
     });
 }
 
-
+export async function getDietPlanByWeek(week) {
+    return await fetchApi(endpoints.getDietPlanByWeek + `/${week}`, {
+        method: requestMethods.get,
+    });
+}
 
 
 export async function deleteDietPlan(mealPlanHash) {

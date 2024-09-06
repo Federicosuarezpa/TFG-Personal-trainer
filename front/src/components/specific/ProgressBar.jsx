@@ -5,14 +5,14 @@ import PropTypes from "prop-types";
 const ProgressBar = ({ loading, complete, onComplete }) => {
     const [progress, setProgress] = useState(0);
     const [visible, setVisible] = useState(false);
-    const [interval, setIntervalId] = useState(null);
+    const [intervalId, setIntervalId] = useState(null);
 
     useEffect(() => {
         let id;
 
         if (loading) {
             setVisible(true);
-            setProgress(0); // Reinicia el progreso al inicio de la carga
+            setProgress(0);
 
             id = setInterval(() => {
                 setProgress(prevProgress => {
@@ -38,8 +38,12 @@ const ProgressBar = ({ loading, complete, onComplete }) => {
             }, 2000);
         }
 
-        return () => clearInterval(Number(interval));
-    }, [loading, complete, onComplete, interval]);
+        return () => {
+            if (id) {
+                clearInterval(id);
+            }
+        };
+    }, [loading, complete, onComplete]);
 
     const calculateStep = (currentProgress) => {
         const maxStep = 0.9;
@@ -81,6 +85,5 @@ ProgressBar.propTypes = {
     complete: PropTypes.bool.isRequired,
     onComplete: PropTypes.func,
 };
-
 
 export default ProgressBar;

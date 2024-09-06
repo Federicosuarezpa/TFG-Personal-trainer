@@ -14,6 +14,19 @@ const ProfileHeader = ({ title }) => {
     const navigate = useNavigate();
     const { signOut } = useAuth();
 
+    const checkImageURL = (url) => {
+        const img = new Image();
+        img.onload = () => {
+            if (img.width === 0) {
+                setImage(profileIcon);
+            }
+        };
+        img.onerror = () => {
+            setImage(profileIcon);
+        };
+        img.src = url;
+    };
+
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -25,7 +38,12 @@ const ProfileHeader = ({ title }) => {
 
     useEffect(() => {
         getUserProfileImage().then((data) => {
-            setImage(data ? data['fileUrl'] : null);
+            const imageUrl = data ? data['fileUrl'] : null;
+            if (imageUrl) {
+                checkImageURL(imageUrl);
+            } else {
+                setImage(profileIcon);
+            }
         });
     }, []);
 
@@ -72,6 +90,7 @@ const ProfileHeader = ({ title }) => {
                         <a href="/health-data">Health Data</a>
                         <a href="/diet-plan">Diet Generator</a>
                         <a href="/training-generator">Training Generator</a>
+                        <a href="/week-plan">Week plan</a>
                         <a onClick={logout}>Log out</a>
                         <a className="close-button-option" onClick={toggleDropdown}>Close menu</a>
                     </div>

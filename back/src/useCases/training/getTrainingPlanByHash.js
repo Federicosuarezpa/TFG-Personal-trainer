@@ -2,14 +2,12 @@ import TrainingPlan from "../../models/trainingPlanModel.js";
 
 async function getTrainingPlanByHash(userId, trainingHash) {
     try {
-        await TrainingPlan.findOne({
+        return await TrainingPlan.findOne({
             where: {
                 userId,
                 trainingPlanHashId: trainingHash
             }
         });
-
-        return uniqueId;
 
     } catch (error) {
         throw error;

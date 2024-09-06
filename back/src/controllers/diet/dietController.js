@@ -7,6 +7,7 @@ import {v4 as uuidv4} from "uuid";
 import {getLastUserHealthData} from "../usersHealthData/usersHealthInfoController.js";
 import deleteDietPlan from "../../useCases/diet/deleteDietPlan.js";
 import updateDietPlanAdded from "../../useCases/diet/updateDietPlanAdded.js";
+import getDietPlanByWeek from "../../useCases/diet/getDietPlanByWeek.js";
 
 dotenv.config({ path: '../../.env' });
 
@@ -45,6 +46,24 @@ async function getDiet(req, res, next) {
             mealPlanJsonFormat: JSON.parse(mealPlan.mealPlanJsonFormat),
             mealPlanHash: mealPlan.mealPlanHash
         };
+        res.status(200).json({message: 'Diet retrieved successfully', info });
+    } catch (error) {
+        next(error)
+    }
+}
+
+async function getDietWeek(req, res, next) {
+    try {
+        const { id } = req.userAuth;
+        const { week } = req.params
+        const mealPlan = await getDietPlanByWeek(id, week);
+        const info = [{
+            id: mealPlan.id,
+            userId: mealPlan.userId,
+            week: mealPlan.week,
+            mealPlanJsonFormat: JSON.parse(mealPlan.mealPlanJsonFormat),
+            mealPlanHash: mealPlan.mealPlanHash
+        }];
         res.status(200).json({message: 'Diet retrieved successfully', info });
     } catch (error) {
         next(error)
@@ -179,7 +198,9 @@ async function updateDietPlan(req, res, next) {
         if (mealPlan.userId !== id) {
             return res.status(403).json({ message: 'You are not allowed to access this diet plan' });
         }
-        await updateDietPlanAdded(1, mealPlanHash);
+        const mealPlans = await getAllDietPlans(id);
+        const mealPlansAdded = mealPlans.filter(data => data.added);
+        await updateDietPlanAdded(1, mealPlanHash, mealPlansAdded.length + 1);
 
         res.status(200).json({ message: 'Diet updated successfully' });
     } catch (error) {
@@ -191,4 +212,4 @@ async function updateDietPlan(req, res, next) {
 
 
 
-export { generateDiet, getDiet, getAllPlans, removeDietPlan, updateDietPlan, getDietExample };
+export { generateDiet, getDiet, getAllPlans, removeDietPlan, updateDietPlan, getDietExample, getDietWeek };

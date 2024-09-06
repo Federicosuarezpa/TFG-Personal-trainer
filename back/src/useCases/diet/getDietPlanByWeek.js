@@ -1,19 +1,19 @@
-import TrainingPlan from "../../models/trainingPlanModel.js";
+import MealPlan from "../../models/mealPlanModel.js";
 
-async function getAllTrainingPlans(userId) {
+async function getDietPlanByWeek(userId, week) {
     try {
-        return await TrainingPlan.findAll({
+        return await MealPlan.findOne({
             where: {
                 userId,
+                week,
             },
             order: [
                 ['id', 'DESC'],
             ],
         });
-
     } catch (error) {
         throw error;
     }
 }
 
-export default getAllTrainingPlans;
+export default getDietPlanByWeek;
